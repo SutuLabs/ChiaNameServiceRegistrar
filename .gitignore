@@ -1,0 +1,5 @@
+hugo.exe
+public/
+resources/
+.vs/
+*.sqlite
