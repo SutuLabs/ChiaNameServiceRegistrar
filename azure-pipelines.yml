@@ -7,7 +7,7 @@ trigger:
     - master
   paths:
     exclude:
-    - content/zh/.attachments/*
+    - content/.attachments/*
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -32,15 +32,20 @@ stages:
       inputs:
         containerRegistryType: 'Container Registry'
         action: 'Run an image'
-        imageName: 'klakegg/hugo:0.70.0-ext-ubuntu'
+        imageName: 'klakegg/hugo:0.80.0-ext-ubuntu'
         volumes: |
           $(build.sourcesDirectory):/src
-          $(build.binariesDirectory):/target
         detached: false
 
     - task: CopyFiles@2
       inputs:
-        SourceFolder: '$(build.sourcesDirectory)/content/zh/.attachments'
+        SourceFolder: '$(build.sourcesDirectory)/public'
+        Contents: '**'
+        TargetFolder: '$(build.binariesDirectory)'
+
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(build.sourcesDirectory)/content/.attachments'
         Contents: '**'
         TargetFolder: '$(build.binariesDirectory)/.attachments'
 
