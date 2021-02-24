@@ -74,7 +74,7 @@ stages:
           - task: FtpUpload@2
             inputs:
               credentialsOption: 'serviceEndpoint'
-              serverEndpoint: 'uniqubeFtp'
+              serverEndpoint: 'uniqubeQaFtp'
               rootDirectory: '$(Agent.BuildDirectory)/drop'
               filePatterns: '**'
               remoteDirectory: '/'
