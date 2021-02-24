@@ -1,0 +1,84 @@
+name: '$(BuildID).$(date:yyMMdd)'
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - content/zh/.attachments/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  versionNumber: '0.1.$(Build.BuildNumber)'
+  qaEnvironment: 'uniqube-qa'
+
+stages:
+- stage: build
+  displayName: Build
+  jobs:
+  - job: Build
+    steps:
+    - task: CmdLine@2
+      inputs:
+        script: 'git submodule update --init --recursive'
+        workingDirectory: '$(build.sourcesDirectory)'
+
+    - task: Docker@0
+      displayName: 'Run hugo'
+      inputs:
+        containerRegistryType: 'Container Registry'
+        action: 'Run an image'
+        imageName: 'klakegg/hugo:0.70.0-ext-ubuntu'
+        volumes: |
+          $(build.sourcesDirectory):/src
+          $(build.binariesDirectory):/target
+        detached: false
+
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(build.sourcesDirectory)/content/zh/.attachments'
+        Contents: '**'
+        TargetFolder: '$(build.binariesDirectory)/.attachments'
+
+    - task: CmdLine@2
+      inputs:
+        script: 'echo $(versionNumber)>$(build.binariesDirectory)/version.txt'
+      displayName: 'write version file'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(build.binariesDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+
+- stage: qa
+  displayName: qa
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+  dependsOn:
+  - build
+  jobs:
+  - deployment: qadeploy
+    displayName: qaDeploy
+    timeoutInMinutes: 10
+    cancelTimeoutInMinutes: 1
+    environment: $(qaEnvironment)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+          - task: FtpUpload@2
+            inputs:
+              credentialsOption: 'serviceEndpoint'
+              serverEndpoint: 'uniqubeFtp'
+              rootDirectory: '$(Agent.BuildDirectory)/drop'
+              filePatterns: '**'
+              remoteDirectory: '/'
+              clean: false
+              cleanContents: false
+              preservePaths: true
+              trustSSL: false
