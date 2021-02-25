@@ -1,23 +1,22 @@
 {{ define "main" }}
 
 <!-- Banner -->
-{{ if .Site.Data.homepage.banner.enable }}
-{{ with .Site.Data.homepage.banner }}
+{{ with .Site.GetPage "/homepage/banner.md" }}
 <section class="banner-main py-7" id="banner">
   <div class="container">
     <div class="row justify-content-between">
       <div class="col-lg-7 col-md-8">
         <div class="main-banner">
-          <span class="text-color font-weight-bold">{{ .writter | markdownify }}</span>
-          <h1 class="mb-3 mt-2">{{ .title | markdownify }}</h1>
+          <span class="text-color font-weight-bold">{{ .Params.writter | markdownify }}</span>
+          <h1 class="mb-3 mt-2">{{ .Params.title | markdownify }}</h1>
 
         </div>
       </div>
 
-      {{ if .image }}
+      {{ if .Params.image }}
       <div class="col-lg-5 d-none d-lg-block">
         <div class="banner-img pt-5">
-          <img src="{{ .image | relURL }}" alt="{{ .title | markdownify }}" class="img-fluid w-100">
+          <img src="{{ .Params.image | relURL }}" alt="{{ .Params.title | markdownify }}" class="img-fluid w-100">
         </div>
       </div>
       {{ end }}
@@ -25,11 +24,9 @@
   </div>
 </section>
 {{ end }}
-{{ end }}
 
 <!-- Book Download -->
-{{ if .Site.Data.homepage.download.enable }}
-{{ with .Site.Data.homepage.download }}
+{{ with .Site.GetPage "/homepage/download.md" }}
 <section class="section" id="book">
   <div class="container">
     <div class="row">
@@ -37,7 +34,7 @@
         <div class="book-preview">
           <img src="{{`images/about/kindle.png` | relURL}}" class="background-device img-fluid" alt="device">
           <div class="book-pages">
-            {{ range .pagePreview }}
+            {{ range .Params.pagePreview }}
             <div class="item">
               <img src="{{ .image | relURL }}" alt="page-preview" class="img-fluid">
               <div class="overlay">
@@ -52,10 +49,10 @@
 
       <div class="col-lg-6">
         <div class="section-heading book-info mt-5 mt-lg-0" style="text-align: center">
-          <h2 class="text-lg mb-4" style="margin-top: 150px;">{{ .title | markdownify }}</h2>
+          <h2 class="text-lg mb-4" style="margin-top: 150px;">{{ .Params.title | markdownify }}</h2>
 
-          {{ if .button.enable }}
-          {{ with .button }}
+          {{ if .Params.button.enable }}
+          {{ with .Params.button }}
           <a href="{{ .link | safeURL }}" class="btn btn-main-2" style="margin-top: 80px;">{{ .label }}</a>
           {{ end }}
           {{ end }}
@@ -65,21 +62,16 @@
   </div>
 </section>
 {{ end }}
-{{ end }}
 
 <!-- Quote -->
-{{ if .Site.Data.homepage.quote.enable }}
-{{ with .Site.Data.homepage.quote }}
+{{ with .Site.GetPage "/homepage/quote.md" }}
 <section class="section bg-grey" id="quote">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="text-center">
           <blockquote class="blockquote">
-            <h2 class="text-lg">"{{ .quote | markdownify }}"</h2>
-            {{ if .quoteBy }}
-            <footer class="blockquote-footer h5 text-color mt-4">{{ .quoteBy }}</footer>
-            {{ end }}
+            <h2 class="text-lg">"{{ .Params.quote | markdownify }}"</h2>
           </blockquote>
         </div>
       </div>
@@ -87,15 +79,13 @@
   </div>
 </section>
 {{ end }}
-{{ end }}
 
 <!-- feature  -->
-{{ if .Site.Data.homepage.feature.enable }}
-{{ with .Site.Data.homepage.feature }}
+{{ with .Site.GetPage "/homepage/feature.md" }}
 <section class="pt-4 section-bottom" id="service">
   <div class="container">
     <div class="row align-items-center">
-      {{ range .featureItem }}
+      {{ range .Params.featureItem }}
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="service-block mb-4 mb-lg-0">
           <i class="{{ .icon }} text-danger"></i>
@@ -107,24 +97,20 @@
   </div>
 </section>
 {{ end }}
-{{ end }}
 
 <!-- introduction -->
-{{ if .Site.Data.homepage.introduction.enable }}
-{{ with .Site.Data.homepage.introduction }}
+{{ with .Site.GetPage "/homepage/introduction.md" }}
 <section class="feature-home section" id="device">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="text-center">
           <blockquote class="blockquote">
-            <h2 class="text-lg">"{{ .title | markdownify }}"</h2>
+            <h2 class="text-lg">"{{ .Params.title | markdownify }}"</h2>
           </blockquote>
   
-          {{ if .button.enable }}
-          {{ with .button }}
+          {{ with .Params.button }}
           <a href="{{ .link | safeURL }}" class="btn btn-main-2">{{ .label }}</a>
-          {{ end }}
           {{ end }}
         </div>
       </div>
@@ -132,25 +118,22 @@
   </div>
 </section>
 {{ end }}
-{{ end }}
 
 <!-- team-->
-{{ if .Site.Data.homepage.team.enable }}
-{{ with .Site.Data.homepage.team }}
+{{ with .Site.GetPage "/homepage/team.md" }}
 <section class="section-bottom testimonial" id="review">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-12">
         <div class="section-heading text-center">
-          <h2 class="mb-3 text-lg">{{ .title | markdownify }}</h2>
-          <p>{{ .subtitle | markdownify }}</p>
+          <h2 class="mb-3 text-lg">{{ .Params.title | markdownify }}</h2>
         </div>
       </div>
     </div>
 
     <div class="row align-items-center">
       <div class="col-lg-12 col-sm-12 col-md-12 testimonial-wrap">
-        {{ range .team}}
+        {{ range .Params.team}}
         <div class="test-item">
           <div class="testimonial-item-content">
             <div class="test-author-thumb mb-4">
@@ -176,23 +159,19 @@
   </div>
 </section>
 {{ end }}
-{{ end }}
 
 <!-- join -->
-{{ if .Site.Data.homepage.join.enable }}
-{{ with .Site.Data.homepage.join }}
+{{ with .Site.GetPage "/homepage/join.md" }}
 <section class="section bg-grey" id="quote">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="text-center">
           <blockquote class="blockquote">
-            <h2 class="text-lg">"{{ .title | markdownify }}"</h2>
+            <h2 class="text-lg">"{{ .Params.title | markdownify }}"</h2>
           </blockquote>
-          {{ if .button.enable }}
-          {{ with .button }}
+          {{ with .Params.button }}
             <a href="{{ .link | safeURL }}" class="btn btn-main-2">{{ .label }}</i></a>
-          {{ end }}
           {{ end }}
         </div>
       </div>
@@ -200,24 +179,22 @@
   </div>
 </section>
 {{ end }}
-{{ end }}
 
 <!-- Contact -->
-{{ if .Site.Data.homepage.contact.enable }}
-{{ with .Site.Data.homepage.contact }}
+{{ with .Site.GetPage "/homepage/contact.md" }}
 <section class="section contact bg-grey" id="contact">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-12 col-lg-8">
         <div class="section-heading text-center">
-          <h2 class="mb-2 text-lg">{{ .title | markdownify }}</h2>
-          <p>{{ .subtitle | markdownify }}</p>
+          <h2 class="mb-2 text-lg">{{ .Params.title | markdownify }}</h2>
+          <p>{{ .Params.subtitle | markdownify }}</p>
         </div>
       </div>
     </div>
 
     <div class="row">
-      {{ range .contactItem }}
+      {{ range .Params.contactItem }}
       <div class="col-lg-4 col-sm-6">
         <div class="contact-info-block text-center mb-4">
           <i class="{{ .icon }}"></i>
@@ -231,7 +208,6 @@
     </div>
   </div>
 </section>
-{{ end }}
 {{ end }}
 
 {{ end }}
