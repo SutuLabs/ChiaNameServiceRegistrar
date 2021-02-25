@@ -54,11 +54,10 @@ stages:
         script: 'echo $(versionNumber)>$(build.binariesDirectory)/version.txt'
       displayName: 'write version file'
 
-    - task: PublishBuildArtifacts@1
+    - task: PublishPipelineArtifact@1
       inputs:
-        PathtoPublish: '$(build.binariesDirectory)'
         ArtifactName: 'drop'
-        publishLocation: 'Container'
+        targetPath: '$(Pipeline.Workspace)'
 
 - stage: qa
   displayName: qa
@@ -80,7 +79,7 @@ stages:
             inputs:
               credentialsOption: 'serviceEndpoint'
               serverEndpoint: 'uniqubeQaFtp'
-              rootDirectory: '$(Agent.BuildDirectory)/drop'
+              rootDirectory: '$(Pipeline.Workspace)/drop/b'
               filePatterns: '**'
               remoteDirectory: '/'
               clean: false
