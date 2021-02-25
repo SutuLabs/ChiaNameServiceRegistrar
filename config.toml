@@ -50,7 +50,7 @@ paginate = 6
 
 #################### default parameters ################################
 [params]
-logo = ""
+logo = "images/icon.png"
 home = "首页"
 # Meta data
 description = "This is meta description"
