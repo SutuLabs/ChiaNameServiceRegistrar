@@ -4,9 +4,9 @@ team:
   # team item loop
   - name : "崔璨"
     image : "images/client/test-1.jpg" # image size 80*80 px
-    designation : "Sunrise ten"
+    designation : "总经理"
     rating : "five" # rating from one to five
-    content : "Quas ut distinctio tenetur animi nihil rem, amet dolorum totam. Ab repudiandae tempore qui fugiat amet ipsa id omnis ipsam."
+    content : "同济大学文学硕士，媒体人，自由摄影师。 拥有多年媒体及市场经验，主导策划多项国内外大型文化活动，业余为《摄影之友》《影像视觉》《影像时代》《快拍快拍》等摄影媒体撰稿，作品曾在宁波国际摄影节展出。 2019年创立素图科技，期待用技术的力量创造全新的媒体生产方式。"
       
   # team item loop
   - name : "Nilam Arthur"
