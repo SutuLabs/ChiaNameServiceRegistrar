@@ -1,6 +1,8 @@
 ---
 title : "联系我们"
-subtitle : "Whether you have questions or you would just like to say hello, contact us.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, atque!"
+subtitle : "无论您有任何和小宇方相关的问题，或者是好的想法，都欢迎您联系我们，可以通过微信公众号留言，我们会尽快回复的哦~
+<br>
+另外，喜欢我们就请多多关注我们哦~"
 contactItem:
 # contact Item loop
   - title : "联系人：梁经理"
