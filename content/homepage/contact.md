@@ -8,13 +8,15 @@ contactItem:
   - title : "联系人：梁经理"
     icon : "ti-headphone-alt" # themify icon pack : https://themify.me/themify-icons
     list:
-      - listItem : "177 1735 4212"
+      - listItem : "177 1735 4212
+<br>"
         
     # contact Item loop
   - title : "微信公众号"
     icon : "ti-email" # themify icon pack : https://themify.me/themify-icons
     list:
-      - listItem : "sututech"
+      - listItem : "sututech
+<br>"
         
     # contact Item loop
   - title : "地址"
