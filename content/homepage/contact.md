@@ -19,7 +19,5 @@ contactItem:
   - title : "地址"
     icon : "ti-location-pin" # themify icon pack : https://themify.me/themify-icons
     list:
-      - listItem : "上海市杨浦区国康路100号
-<br/>
-上海国际设计中心2202"
+      - listItem : "上海市杨浦区国康路100号上海国际设计中心2202"
 ---
