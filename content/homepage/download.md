@@ -3,7 +3,7 @@ pagePreview:
 # page preview loop
   - image : "/.attachments/2-5d2da06b-4077-4b32-96fe-78ae81bf3155.jpg"
   - image : "images/about/book_page2.png"
-  - image : "images/about/book_page.png"
+  - image : "/.attachments/2-5d2da06b-4077-4b32-96fe-78ae81bf3155.jpg"
 
 title : "小宇方——专业的区块链 <br> 数字艺术流通社区"
 
