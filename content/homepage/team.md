@@ -14,6 +14,13 @@ team:
     designation : "技术总监"
     rating : "four" # rating from one to five
     content : "上海交通大学计算机博士研究生（在读）。 曾任新媒传信（飞信）项目经理、霍尼韦尔Honeywell架构师，先后在人脸检测和图像处理方面发表了4篇论文，申请中国、美国专利共10项。 自主研发了国产区块链项目“优擎区块链数据库”，被收录于《境内区块链信息服务备案清单（第二批）》。"
+
+  # team item loop
+  - name : "陈思颖"
+    image : "/.attachments/chensiying-2b132d05-f09d-4406-b9bb-6de2199325b0.jpg" # image size 80*80 px
+    designation : "运营总监"
+    rating : "five" # rating from one to five
+    content : "同济大学文学硕士。曾负责多项国内外大型文化活动及展览的策划与执行，拥有丰富的文化行业从业经验。在德国生活学习多年，熟练掌握德语、英语、日语。"
       
   # team item loop
   - name : "常雅如"
