@@ -20,7 +20,7 @@ team:
     image : "/.attachments/chensiying-2b132d05-f09d-4406-b9bb-6de2199325b0.jpg" # image size 80*80 px
     designation : "运营总监"
     rating : "five" # rating from one to five
-    content : "同济大学文学硕士。曾负责多项国内外大型文化活动及展览的策划与执行，拥有丰富的文化行业从业经验。在德国生活学习多年，熟练掌握德语、英语、日语。"
+    content : "同济大学文学硕士。曾负责多项国内外大型文化活动及展览的策划与执行，拥有丰富的文化行业从业经验。"
       
   # team item loop
   - name : "常雅如"
