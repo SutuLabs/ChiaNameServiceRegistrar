@@ -3,3 +3,4 @@ public/
 resources/
 .vs/
 *.sqlite
+static/.attachments

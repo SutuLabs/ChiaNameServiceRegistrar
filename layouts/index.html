@@ -108,7 +108,6 @@
           <blockquote class="blockquote">
             <h2 class="text-lg">"{{ .Params.title | markdownify }}"</h2>
           </blockquote>
-  
           {{ with .Params.button }}
           <a href="{{ .link | safeURL }}" class="btn btn-main-2">{{ .label }}</a>
           {{ end }}
@@ -189,7 +188,7 @@
     <div class="row">
       {{ range .Params.contactItem }}
       <div class="col-lg-4 col-sm-6">
-        <div class="contact-info-block text-center mb-4">
+        <div class="contact-info-block text-center mb-4" style="height: 290px;">
           <i class="{{ .icon }}"></i>
           <p class="mb-0">{{ .title | markdownify }}</p>
           {{ range .list }}
