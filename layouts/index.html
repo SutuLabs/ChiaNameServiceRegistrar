@@ -9,10 +9,8 @@
         <div class="main-banner">
           <span class="text-color font-weight-bold">{{ .Params.writter | markdownify }}</span>
           <h1 class="mb-3 mt-2">{{ .Params.title | markdownify }}</h1>
-
         </div>
       </div>
-
       {{ if .Params.image }}
       <div class="col-lg-5 d-none d-lg-block">
         <div class="banner-img pt-5">
@@ -109,7 +107,7 @@
             <h2 class="text-lg">"{{ .Params.title | markdownify }}"</h2>
           </blockquote>
           {{ with .Params.button }}
-          <a href="{{ .link | safeURL }}" class="btn btn-main-2">{{ .label }}</a>
+          <a href="{{ .link | safeURL }}" class="btn btn-main-2" style="margin-top: 50px;">{{ .label }}</a>
           {{ end }}
         </div>
       </div>
@@ -163,7 +161,7 @@
             <h2 class="text-lg">"{{ .Params.title | markdownify }}"</h2>
           </blockquote>
           {{ with .Params.button }}
-            <a href="{{ .link | safeURL }}" class="btn btn-main-2">{{ .label }}</i></a>
+            <a href="{{ .link | safeURL }}" class="btn btn-main-2"  style="margin-top: 50px;">{{ .label }}</i></a>
           {{ end }}
         </div>
       </div>
