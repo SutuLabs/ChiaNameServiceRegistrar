@@ -9,10 +9,8 @@
         <div class="main-banner">
           <span class="text-color font-weight-bold">{{ .Params.writter | markdownify }}</span>
           <h1 class="mb-3 mt-2">{{ .Params.title | markdownify }}</h1>
-
         </div>
       </div>
-
       {{ if .Params.image }}
       <div class="col-lg-5 d-none d-lg-block">
         <div class="banner-img pt-5">
@@ -71,7 +69,7 @@
       <div class="col-lg-8">
         <div class="text-center">
           <blockquote class="blockquote">
-            <h2 class="text-lg">"{{ .Params.quote | markdownify }}"</h2>
+            <h2 class="text-lg">{{ .Params.quote | markdownify }}</h2>
           </blockquote>
         </div>
       </div>
@@ -88,7 +86,7 @@
       {{ range .Params.featureItem }}
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="service-block mb-4 mb-lg-0">
-          <i class="{{ .icon }} text-danger"></i>
+          <i><img src="{{.icon}}"></i>
           <h4 class="mb-3 mt-4">{{ .title | markdownify }}</h4>
         </div>
       </div>
@@ -106,10 +104,10 @@
       <div class="col-lg-8">
         <div class="text-center">
           <blockquote class="blockquote">
-            <h2 class="text-lg">"{{ .Params.title | markdownify }}"</h2>
+            <h2 class="text-lg">{{ .Params.title | markdownify }}</h2>
           </blockquote>
           {{ with .Params.button }}
-          <a href="{{ .link | safeURL }}" class="btn btn-main-2">{{ .label }}</a>
+          <a href="{{ .link | safeURL }}" class="btn btn-main-2" style="margin-top: 50px;">{{ .label }}</a>
           {{ end }}
         </div>
       </div>
@@ -160,10 +158,10 @@
       <div class="col-lg-8">
         <div class="text-center">
           <blockquote class="blockquote">
-            <h2 class="text-lg">"{{ .Params.title | markdownify }}"</h2>
+            <h2 class="text-lg">{{ .Params.title | markdownify }}</h2>
           </blockquote>
           {{ with .Params.button }}
-            <a href="{{ .link | safeURL }}" class="btn btn-main-2">{{ .label }}</i></a>
+            <a href="{{ .link | safeURL }}" class="btn btn-main-2"  style="margin-top: 50px;">{{ .label }}</i></a>
           {{ end }}
         </div>
       </div>
@@ -189,7 +187,7 @@
       {{ range .Params.contactItem }}
       <div class="col-lg-4 col-sm-6">
         <div class="contact-info-block text-center mb-4" style="height: 290px;">
-          <i class="{{ .icon }}"></i>
+          <i><img src="{{.icon}}"></i>
           <p class="mb-0">{{ .title | markdownify }}</p>
           {{ range .list }}
           <h5>{{ .listItem }}</h5>
