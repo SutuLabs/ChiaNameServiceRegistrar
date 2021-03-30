@@ -1,5 +1,5 @@
 ######################## default configuration ####################
-baseURL = "http://uniqube.supernova.uchaindb.com"
+baseURL = "/"
 languageCode = "zh-cn"
 title = "小宇方uniqube"
 theme = "influencer-hugo"
