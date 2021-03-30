@@ -51,7 +51,7 @@
 
           {{ if .Params.button.enable }}
           {{ with .Params.button }}
-          <a href="{{ .link | safeURL }}" class="btn btn-main-2" style="margin-top: 80px;">{{ .label }}</a>
+          <a href="{{ .link | safeURL }}" class="btn btn-main-2" style="margin-top: 80px;" target="_blank">{{ .label }}</a>
           {{ end }}
           {{ end }}
         </div>
@@ -107,7 +107,7 @@
             <h2 class="text-lg">{{ .Params.title | markdownify }}</h2>
           </blockquote>
           {{ with .Params.button }}
-          <a href="{{ .link | safeURL }}" class="btn btn-main-2" style="margin-top: 50px;">{{ .label }}</a>
+          <a href="{{ .link | safeURL }}" class="btn btn-main-2" style="margin-top: 50px;" target="_blank">{{ .label }}</a>
           {{ end }}
         </div>
       </div>
@@ -161,7 +161,7 @@
             <h2 class="text-lg">{{ .Params.title | markdownify }}</h2>
           </blockquote>
           {{ with .Params.button }}
-            <a href="{{ .link | safeURL }}" class="btn btn-main-2"  style="margin-top: 50px;">{{ .label }}</i></a>
+            <a href="{{ .link | safeURL }}" class="btn btn-main-2"  style="margin-top: 50px;" target="_blank">{{ .label }}</i></a>
           {{ end }}
         </div>
       </div>

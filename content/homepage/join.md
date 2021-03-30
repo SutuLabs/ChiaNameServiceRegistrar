@@ -4,5 +4,5 @@ title : "一流的创作需要一流的收藏家！ <br> 欢迎加入我们 <br>
 button:
   enable : true
   label : "下载白皮书"
-  link : "#"
+  link : "https://uniqube.blob.core.chinacloudapi.cn/files/WhitePaper.pdf"
 ---
