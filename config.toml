@@ -1,7 +1,7 @@
 ######################## default configuration ####################
 baseURL = "/"
 languageCode = "zh-cn"
-title = "小宇方uniqube"
+title = "小宇方Uniqube"
 theme = "influencer-hugo"
 summaryLength = "10"
 paginate = 6
@@ -58,7 +58,7 @@ author = "Themefisher"
 # Google Analitycs
 googleAnalitycsID = "" # Your ID
 # copyright
-copyright = "Copyright &copy; 2019 [GetHugoThemes](https://gethugothemes.com) All Rights Reserved"
+copyright = "[沪公网安备 31011002005525号](https://beian.miit.gov.cn/)"
 
 # Preloader
 [params.preloader]
