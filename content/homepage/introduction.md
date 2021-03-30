@@ -5,5 +5,5 @@ feature: "双重通证机制，解决流通困扰"
 button:
   enable : true
   label : "下载白皮书"
-  link : "https://uniqube.blob.core.chinacloudapi.cn/files/OnePaper.pdf"
+  link : "https://uniqube.blob.core.chinacloudapi.cn/files/WhitePaper.pdf"
 ---

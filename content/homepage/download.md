@@ -11,5 +11,5 @@ title : "小宇方——专业的区块链 <br> 数字艺术流通社区"
 button:
   enable : true
   label : "下载白皮书"
-  link : "https://uniqube.blob.core.chinacloudapi.cn/files/OnePaper.pdf"
+  link : "https://uniqube.blob.core.chinacloudapi.cn/files/WhitePaper.pdf"
 ---
