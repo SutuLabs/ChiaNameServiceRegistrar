@@ -15,6 +15,7 @@ pool:
 variables:
   versionNumber: '0.1.$(Build.BuildNumber)'
   qaEnvironment: 'uniqube-qa'
+  prodEnvironment: 'uniqube-prod'
 
 stages:
 - stage: build
@@ -79,6 +80,35 @@ stages:
             inputs:
               credentialsOption: 'serviceEndpoint'
               serverEndpoint: 'uniqubeSiteQaFtp'
+              rootDirectory: '$(Pipeline.Workspace)/drop/b'
+              filePatterns: '**'
+              remoteDirectory: '/'
+              clean: false
+              cleanContents: false
+              preservePaths: true
+              trustSSL: false
+
+- stage: prod
+  displayName: prod
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+  dependsOn:
+  - build
+  - qa
+  jobs:
+  - deployment: proddeploy
+    displayName: prodDeploy
+    timeoutInMinutes: 10
+    cancelTimeoutInMinutes: 1
+    environment: $(prodEnvironment)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+          - task: FtpUpload@2
+            inputs:
+              credentialsOption: 'serviceEndpoint'
+              serverEndpoint: 'uniqubeSiteProdFtp'
               rootDirectory: '$(Pipeline.Workspace)/drop/b'
               filePatterns: '**'
               remoteDirectory: '/'
