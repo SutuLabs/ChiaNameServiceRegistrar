@@ -13,7 +13,7 @@ contactItem:
   - title : "微信公众号"
     icon : "images/icon/联系我们-微信公众号.png" # themify icon pack : https://themify.me/themify-icons
     list:
-      - listItem : "sututech"
+      - listItem : "uniqube_cn"
         
     # contact Item loop
   - title : "地址"
