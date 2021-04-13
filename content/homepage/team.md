@@ -13,7 +13,7 @@ team:
     image : "/.attachments/liangshuang-5eaa43b7-421f-4ef2-9521-c2ab700d4fc6.jpg" # image size 80*80 px
     designation : "技术总监"
     rating : "four" # rating from one to five
-    content : "上海交通大学计算机博士研究生，开源书籍《区块链系统实现》作者，“区块链探索”学习小组发起人。 曾任新媒传信（飞信）项目经理、霍尼韦尔Honeywell架构师，先后在人脸检测和图像处理方面发表了4篇论文，获得中国、美国专利共5项。 "
+    content : "上海交通大学计算机博士研究生，开源书籍《区块链系统实现》作者。 曾任新媒传信（飞信）项目经理、霍尼韦尔Honeywell架构师，先后在人脸检测和图像处理方面发表了4篇论文，获得中国、美国专利共5项。 "
 
   # team item loop
   - name : "陈思颖"
