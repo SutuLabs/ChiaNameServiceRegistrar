@@ -6,14 +6,14 @@ team:
     image : "/.attachments/cuican-52b1da47-7f4a-4211-9524-2289150d47c6.jpg" # image size 80*80 px
     designation : "总经理"
     rating : "five" # rating from one to five
-    content : "同济大学文学硕士，媒体人，自由摄影师。 拥有多年媒体及市场经验，主导策划多项国内外大型文化活动，摄影作品曾在宁波国际摄影节展出。 2019年创立素图科技，期待用技术的力量创造全新的媒体生产方式。"
+    content : "同济大学文学硕士，自由摄影师，同济大学生科技创业者联盟副秘书长。 曾任鲁迅文化基金会公益项目总监、鲁迅长孙周令飞先生私人助理，主导策划多项国内外大型文化活动。 2019年创立素图科技，期待用技术的力量创造全新的艺术生产方式。"
       
   # team item loop
   - name : "梁爽"
     image : "/.attachments/liangshuang-5eaa43b7-421f-4ef2-9521-c2ab700d4fc6.jpg" # image size 80*80 px
     designation : "技术总监"
     rating : "four" # rating from one to five
-    content : "上海交通大学计算机博士研究生（在读）。 曾任新媒传信（飞信）项目经理、霍尼韦尔Honeywell架构师，先后在人脸检测和图像处理方面发表了4篇论文，申请中国、美国专利共10项。 "
+    content : "上海交通大学计算机博士研究生，开源书籍《区块链系统实现》作者，“区块链探索”学习小组发起人。 曾任新媒传信（飞信）项目经理、霍尼韦尔Honeywell架构师，先后在人脸检测和图像处理方面发表了4篇论文，获得中国、美国专利共5项。 "
 
   # team item loop
   - name : "陈思颖"
