@@ -182,11 +182,6 @@ const animate = ({viewportWidth, viewportHeight, tick}) => {
 
 const init = () => {
   play(animate)
-
-  //console.log(document.querySelector(".demo-1 > canvas") )
-  /*document.querySelector("#box").onclick = function () {
-    this.hidden = true
-  }*/
 }
 
 init()
