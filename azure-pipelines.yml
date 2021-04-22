@@ -28,6 +28,17 @@ stages:
         script: 'git submodule update --init --recursive'
         workingDirectory: '$(build.sourcesDirectory)'
 
+    - task: Npm@1
+      displayName: 'install node modules'
+      inputs:
+        script: 'install'
+        
+
+    - task: CmdLine@2
+      displayName: 'webpack'
+      inputs:
+        script: 'npm run build'
+
     - task: Docker@0
       displayName: 'Run hugo'
       inputs:
