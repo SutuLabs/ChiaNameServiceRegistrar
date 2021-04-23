@@ -31,8 +31,7 @@ stages:
     - task: Npm@1
       displayName: 'install node modules'
       inputs:
-        script: 'install'
-        
+        command: 'install'
 
     - task: CmdLine@2
       displayName: 'webpack'
