@@ -21,6 +21,12 @@ module.exports = {
     new webpack.DefinePlugin({
       devMode,
     }),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [
+        '**/*',
+        '!images/**',
+      ],
+    }),
   ],
   module: {
     rules: [
