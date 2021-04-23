@@ -181,6 +181,9 @@ const animate = ({viewportWidth, viewportHeight, tick}) => {
 }
 
 const init = () => {
+  document.querySelector("#box").addEventListener("click", function () {
+    stop()
+  })
   play(animate)
 }
 
