@@ -26,7 +26,7 @@
 </script>
 
 {{ "<!-- Main Script -->" | safeHTML }}
-{{ $script := resources.Get "js/script.js" | minify}}
+{{ $script := resources.Get "js/script_edit.js" | minify}}
 <script src="{{ $script.Permalink }}"></script>
 {{ "<!-- google analitycs -->" | safeHTML }}
 {{ with .Site.Params.googleAnalitycsID }}
