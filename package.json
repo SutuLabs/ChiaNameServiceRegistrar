@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --open --host 127.0.0.1 --port 3500",
-    "build": "webpack --env.production && hugo --minify"
+    "build": "webpack --env.production"
   },
   "keywords": [],
   "author": "",
