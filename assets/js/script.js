@@ -16,8 +16,9 @@
     };
 
     $("#box").click(function () {
+      $("#box_button_container").fadeOut(600);
       $("#box").slideUp(1000, function () {
-        $("#box").hidden = true;
+        $("#box").hide();
       });
       $("#navbarmain ul").fadeIn(1000, function () {
         if (mainmenu_area_color != "rgba(0, 0, 0, 0)") {

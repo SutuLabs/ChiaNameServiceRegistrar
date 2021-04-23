@@ -1,7 +1,13 @@
 {{ define "main" }}
 
 <div id="box" style="width: 100vw;height:100vh">
+  <div id="box_button_container" style="position: absolute; top: 90%; width: 100%;">
+    <div style="width: 165px; margin: auto;">
+      <div class="btn btn-main-2">点击进入首页</div>
+    </div>
+  </div>
 </div>
+
 
 <!-- Banner -->
 {{ with .Site.GetPage "/homepage/banner.md" }}
