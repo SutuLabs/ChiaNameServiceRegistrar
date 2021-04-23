@@ -72,7 +72,7 @@ stages:
 
 - stage: qa
   displayName: qa
-  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/cube-animation'))
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
   dependsOn:
   - build
   jobs:
