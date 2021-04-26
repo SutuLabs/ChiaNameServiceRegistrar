@@ -26,7 +26,8 @@
 </script>
 
 {{ "<!-- Main Script -->" | safeHTML }}
-{{ $script := resources.Get "js/script.js" | minify}}
+<!-- script_edit.js is a copy of script.js from the template with some changes. It is suffixed with "edit" to avoid wrongly referring to the template script file -->
+{{ $script := resources.Get "js/script_edit.js" | minify}}
 <script src="{{ $script.Permalink }}"></script>
 {{ "<!-- google analitycs -->" | safeHTML }}
 {{ with .Site.Params.googleAnalitycsID }}
@@ -89,3 +90,5 @@
 }
 </style>
 {{ end }}
+
+<script type="text/javascript" src="bundle.js"></script>

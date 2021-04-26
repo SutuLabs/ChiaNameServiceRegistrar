@@ -5,6 +5,8 @@ title = "小宇方Uniqube"
 theme = "influencer-hugo"
 summaryLength = "10"
 paginate = 6
+staticDir = "static"
+assetDir = "assets"
 
 ############################# Plugins ##############################
 [params.plugins]

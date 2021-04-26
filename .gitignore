@@ -4,3 +4,7 @@ resources/
 .vs/
 *.sqlite
 static/.attachments
+node_modules
+dist
+static/*
+!static/images

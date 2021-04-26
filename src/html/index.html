@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>小宇方 Uniqube</title>
+    <meta name="description" content="A tutorial on how to create the Apple Fifth Avenue Cube using WebGL" />
+    <meta name="keywords" content="webgl, apple cube, fifth avenue, animation, regl, tutorial, demo" />
+    <meta name="author" content="Lorenzo Cadamuro" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="base.css" />
+    <script>
+      document.documentElement.className = "js"
+      var supportsCssVars = function() {
+        var e,
+          t = document.createElement("style")
+        return (t.innerHTML = "root: { --tmp-var: bold; }"), document.head.appendChild(t), (e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)"))), t.parentNode.removeChild(t), e
+      }
+      supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.")
+    </script>
+    <style>
+      #box {
+        width: 50%;
+        height: 50vh; 
+      }
+    </style>
+  </head>
+  <body class="demo-1">
+    <main>
+      <div class="frame">
+        <h1 class="frame__title"></h1>
+      </div>
+    </main>
+    <div id="box"></div>
+  </body>
+</html>
