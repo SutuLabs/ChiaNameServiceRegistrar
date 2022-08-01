@@ -31,7 +31,7 @@ stages:
     - task: CmdLine@2
       displayName: 'install node modules'
       inputs:
-        command: 'yarn install'
+        script: 'yarn install'
 
     - task: CmdLine@2
       displayName: 'webpack'
