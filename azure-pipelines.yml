@@ -54,12 +54,6 @@ stages:
         Contents: '**'
         TargetFolder: '$(build.binariesDirectory)'
 
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: '$(build.sourcesDirectory)/content/.attachments'
-        Contents: '**'
-        TargetFolder: '$(build.binariesDirectory)/.attachments'
-
     - task: CmdLine@2
       inputs:
         script: 'echo $(versionNumber)>$(build.binariesDirectory)/version.txt'
