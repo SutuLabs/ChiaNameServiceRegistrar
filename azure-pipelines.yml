@@ -28,7 +28,7 @@ stages:
         script: 'git submodule update --init --recursive'
         workingDirectory: '$(build.sourcesDirectory)'
 
-    - task: yarn@1
+    - task: CmdLine@2
       displayName: 'install node modules'
       inputs:
         command: 'yarn install'
@@ -89,36 +89,7 @@ stages:
           - task: FtpUpload@2
             inputs:
               credentialsOption: 'serviceEndpoint'
-              serverEndpoint: 'cnsSiteQaFtp'
-              rootDirectory: '$(Pipeline.Workspace)/drop/b'
-              filePatterns: '**'
-              remoteDirectory: '/'
-              clean: false
-              cleanContents: false
-              preservePaths: true
-              trustSSL: false
-
-- stage: prod
-  displayName: prod
-  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-  dependsOn:
-  - build
-  - qa
-  jobs:
-  - deployment: proddeploy
-    displayName: prodDeploy
-    timeoutInMinutes: 10
-    cancelTimeoutInMinutes: 1
-    environment: $(prodEnvironment)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-
-          - task: FtpUpload@2
-            inputs:
-              credentialsOption: 'serviceEndpoint'
-              serverEndpoint: 'cnsSiteProdFtp'
+              serverEndpoint: 'cns_site_qa_ftp'
               rootDirectory: '$(Pipeline.Workspace)/drop/b'
               filePatterns: '**'
               remoteDirectory: '/'
