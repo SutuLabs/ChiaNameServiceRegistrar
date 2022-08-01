@@ -56,6 +56,11 @@ const textures = [
     maskId: CubeMasks.M1,
   },
   {
+    texture: Texture(regl, 'text-1.png'),
+    typeId: ContentTypes.RED,
+    maskId: CubeMasks.M5,
+  },
+  {
     texture: Texture(regl, 'logo.png'),
     typeId: ContentTypes.BLUE,
     maskId: CubeMasks.M2,
@@ -69,11 +74,6 @@ const textures = [
     texture: Texture(regl, 'text-1.png'),
     typeId: ContentTypes.BLUE,
     maskId: CubeMasks.M4,
-  },
-  {
-    texture: Texture(regl, 'text-2.png'),
-    typeId: ContentTypes.RED,
-    maskId: CubeMasks.M5,
   },
 ]
 

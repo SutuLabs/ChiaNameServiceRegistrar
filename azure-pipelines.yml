@@ -14,8 +14,8 @@ pool:
 
 variables:
   versionNumber: '0.1.$(Build.BuildNumber)'
-  qaEnvironment: 'uniqube-qa'
-  prodEnvironment: 'uniqube-prod'
+  qaEnvironment: 'cns-site-qa'
+  prodEnvironment: 'cns-site-prod'
 
 stages:
 - stage: build
@@ -28,15 +28,15 @@ stages:
         script: 'git submodule update --init --recursive'
         workingDirectory: '$(build.sourcesDirectory)'
 
-    - task: Npm@1
+    - task: yarn@1
       displayName: 'install node modules'
       inputs:
-        command: 'install'
+        command: 'yarn install'
 
     - task: CmdLine@2
       displayName: 'webpack'
       inputs:
-        script: 'npm run build'
+        script: 'yarn run build'
 
     - task: Docker@0
       displayName: 'Run hugo'
@@ -89,7 +89,7 @@ stages:
           - task: FtpUpload@2
             inputs:
               credentialsOption: 'serviceEndpoint'
-              serverEndpoint: 'uniqubeSiteQaFtp'
+              serverEndpoint: 'cnsSiteQaFtp'
               rootDirectory: '$(Pipeline.Workspace)/drop/b'
               filePatterns: '**'
               remoteDirectory: '/'
@@ -118,7 +118,7 @@ stages:
           - task: FtpUpload@2
             inputs:
               credentialsOption: 'serviceEndpoint'
-              serverEndpoint: 'uniqubeSiteProdFtp'
+              serverEndpoint: 'cnsSiteProdFtp'
               rootDirectory: '$(Pipeline.Workspace)/drop/b'
               filePatterns: '**'
               remoteDirectory: '/'
