@@ -71,7 +71,7 @@ const textures = [
     maskId: CubeMasks.M3,
   },
   {
-    texture: Texture(regl, 'text-1.png'),
+    texture: Texture(regl, 'text-2.png'),
     typeId: ContentTypes.BLUE,
     maskId: CubeMasks.M4,
   },
