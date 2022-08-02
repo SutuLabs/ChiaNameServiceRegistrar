@@ -1,7 +1,7 @@
 ######################## default configuration ####################
 baseURL = "/"
 languageCode = "zh-cn"
-title = "小宇方Uniqube"
+title = "Chia Name Service"
 theme = "influencer-hugo"
 summaryLength = "10"
 paginate = 6
@@ -31,36 +31,15 @@ assetDir = "assets"
   [[params.plugins.js]]
   URL = "plugins/magnific-popup/magnific-popup.min.js"
 
-  
-############################## navigation ###############################
-[menu]
-  [[menu.main]]
-  name = "首页"
-  URL = ""
-  weight = 1
-
-  [[menu.main]]
-  name = "白皮书"
-  URL = "book"
-  weight = 2
-  
-  [[menu.main]]
-  name = "联系我们"
-  URL = "contact"
-  weight = 3
-
 
 #################### default parameters ################################
 [params]
-logo = "images/icon.png"
 home = "首页"
 # Meta data
 description = "This is meta description"
 author = "Themefisher"
 # Google Analitycs
 googleAnalitycsID = "" # Your ID
-# copyright
-copyright = "[沪公网安备 31011002005525号](https://beian.miit.gov.cn/)"
 
 # Preloader
 [params.preloader]

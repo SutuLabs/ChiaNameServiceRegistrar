@@ -14,8 +14,8 @@ pool:
 
 variables:
   versionNumber: '0.1.$(Build.BuildNumber)'
-  qaEnvironment: 'uniqube-qa'
-  prodEnvironment: 'uniqube-prod'
+  qaEnvironment: 'cns-site-qa'
+  prodEnvironment: 'cns-site-prod'
 
 stages:
 - stage: build
@@ -28,15 +28,15 @@ stages:
         script: 'git submodule update --init --recursive'
         workingDirectory: '$(build.sourcesDirectory)'
 
-    - task: Npm@1
+    - task: CmdLine@2
       displayName: 'install node modules'
       inputs:
-        command: 'install'
+        script: 'yarn install'
 
     - task: CmdLine@2
       displayName: 'webpack'
       inputs:
-        script: 'npm run build'
+        script: 'yarn run build'
 
     - task: Docker@0
       displayName: 'Run hugo'
@@ -53,12 +53,6 @@ stages:
         SourceFolder: '$(build.sourcesDirectory)/public'
         Contents: '**'
         TargetFolder: '$(build.binariesDirectory)'
-
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: '$(build.sourcesDirectory)/content/.attachments'
-        Contents: '**'
-        TargetFolder: '$(build.binariesDirectory)/.attachments'
 
     - task: CmdLine@2
       inputs:
@@ -89,36 +83,7 @@ stages:
           - task: FtpUpload@2
             inputs:
               credentialsOption: 'serviceEndpoint'
-              serverEndpoint: 'uniqubeSiteQaFtp'
-              rootDirectory: '$(Pipeline.Workspace)/drop/b'
-              filePatterns: '**'
-              remoteDirectory: '/'
-              clean: false
-              cleanContents: false
-              preservePaths: true
-              trustSSL: false
-
-- stage: prod
-  displayName: prod
-  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-  dependsOn:
-  - build
-  - qa
-  jobs:
-  - deployment: proddeploy
-    displayName: prodDeploy
-    timeoutInMinutes: 10
-    cancelTimeoutInMinutes: 1
-    environment: $(prodEnvironment)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-
-          - task: FtpUpload@2
-            inputs:
-              credentialsOption: 'serviceEndpoint'
-              serverEndpoint: 'uniqubeSiteProdFtp'
+              serverEndpoint: 'cns_site_qa_ftp'
               rootDirectory: '$(Pipeline.Workspace)/drop/b'
               filePatterns: '**'
               remoteDirectory: '/'

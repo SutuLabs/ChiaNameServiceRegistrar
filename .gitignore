@@ -8,3 +8,4 @@ node_modules
 dist
 static/*
 !static/images
+.hugo_build.lock
