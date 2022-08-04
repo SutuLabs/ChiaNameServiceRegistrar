@@ -36,7 +36,7 @@ assetDir = "assets"
 [params]
 home = "首页"
 # Meta data
-description = "This is meta description"
+description = "Your Web3 Profile"
 author = "Themefisher"
 # Google Analitycs
 googleAnalitycsID = "" # Your ID
