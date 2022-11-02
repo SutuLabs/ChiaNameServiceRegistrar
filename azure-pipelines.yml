@@ -1,83 +1,68 @@
-name: '$(BuildID).$(date:yyMMdd)'
+name: "$(BuildID).$(date:yyMMdd)"
 
 trigger:
   batch: true
   branches:
     include:
-    - master
+      - master
   paths:
     exclude:
-    - content/.attachments/*
+      - content/.attachments/*
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 variables:
-  versionNumber: '0.1.$(Build.BuildNumber)'
-  qaEnvironment: 'cns-site-qa'
-  prodEnvironment: 'cns-site-prod'
+  versionNumber: "0.1.$(Build.BuildNumber)"
+  qaEnvironment: "cns-site-qa"
+  prodEnvironment: "cns-site-prod"
 
 stages:
-- stage: build
-  displayName: Build
-  jobs:
-  - job: Build
-    steps:
-    - task: CmdLine@2
-      inputs:
-        script: 'git submodule update --init --recursive'
-        workingDirectory: '$(build.sourcesDirectory)'
-
-    - task: Docker@0
-      displayName: 'Run hugo'
-      inputs:
-        containerRegistryType: 'Container Registry'
-        action: 'Run an image'
-        imageName: 'klakegg/hugo:0.80.0-ext-ubuntu'
-        volumes: |
-          $(build.sourcesDirectory):/src
-        detached: false
-
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: '$(build.sourcesDirectory)/public'
-        Contents: '**'
-        TargetFolder: '$(build.binariesDirectory)'
-
-    - task: CmdLine@2
-      inputs:
-        script: 'echo $(versionNumber)>$(build.binariesDirectory)/version.txt'
-      displayName: 'write version file'
-
-    - task: PublishPipelineArtifact@1
-      inputs:
-        ArtifactName: 'drop'
-        targetPath: '$(Pipeline.Workspace)'
-
-- stage: qa
-  displayName: qa
-  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-  dependsOn:
-  - build
-  jobs:
-  - deployment: qadeploy
-    displayName: qaDeploy
-    timeoutInMinutes: 10
-    cancelTimeoutInMinutes: 1
-    environment: $(qaEnvironment)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-
-          - task: FtpUpload@2
+  - stage: build
+    displayName: Build
+    jobs:
+      - job: Build
+        steps:
+          - task: NodeTool@0
             inputs:
-              credentialsOption: 'serviceEndpoint'
-              serverEndpoint: 'cns_site_qa_ftp'
-              rootDirectory: '$(Pipeline.Workspace)/drop/b'
-              filePatterns: '**'
-              remoteDirectory: '/'
-              clean: false
-              cleanContents: false
-              preservePaths: true
-              trustSSL: false
+              versionSpec: "16.x"
+            displayName: "Install Node.js"
+
+          - task: CmdLine@2
+            inputs:
+              workingDirectory: "$(Build.SourcesDirectory)"
+              script: "yarn"
+            displayName: "yarn"
+
+          - task: CmdLine@2
+            inputs:
+              workingDirectory: "$(Build.SourcesDirectory)"
+              script: "yarn build"
+            displayName: "yarn build"
+
+  - stage: qa
+    displayName: qa
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+    dependsOn:
+      - build
+    jobs:
+      - deployment: qadeploy
+        displayName: qaDeploy
+        timeoutInMinutes: 10
+        cancelTimeoutInMinutes: 1
+        environment: $(qaEnvironment)
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: FtpUpload@2
+                  inputs:
+                    credentialsOption: "serviceEndpoint"
+                    serverEndpoint: "cns_site_qa_ftp"
+                    rootDirectory: "$(Pipeline.Workspace)/drop/b"
+                    filePatterns: "**"
+                    remoteDirectory: "/"
+                    clean: false
+                    cleanContents: false
+                    preservePaths: true
+                    trustSSL: false
