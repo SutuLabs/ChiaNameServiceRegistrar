@@ -1,40 +1,19 @@
 module.exports = {
+  root: true,
   env: {
-    browser: true,
-    es6: true,
+    node: true,
   },
-  extends: ["google"],
-  globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
-  },
+  extends: [
+    "plugin:vue/vue3-essential",
+    "eslint:recommended",
+    "@vue/typescript/recommended",
+    "plugin:prettier/recommended",
+  ],
   parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: "module",
+    ecmaVersion: 2020,
   },
   rules: {
-    indent: ["error", 2, { SwitchCase: 1 }],
-    "valid-jsdoc": 0,
-    "require-jsdoc": 0,
-    "no-var": "error",
-    "no-unused-vars": 1,
-    "new-cap": 0,
-    "prefer-template": 2,
-    semi: ["error", "never"],
-    "array-element-newline": 0,
-    "max-len": ["error", { code: 800 }],
-
-    "prefer-const": 1,
-    "arrow-spacing": ["error", { before: true, after: true }],
-    "comma-dangle": [
-      "error",
-      {
-        objects: "only-multiline",
-        arrays: "only-multiline",
-        imports: "never",
-        exports: "never",
-        functions: "never",
-      },
-    ],
+    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
   },
-}
+};
