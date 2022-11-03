@@ -59,7 +59,7 @@
             </div>
           </div>
           <span class="icon is-left">
-            <i class="mdi mdi-magnify mdi-36px"></i>
+            <i class="mdi mdi-magnify mdi-18px"></i>
           </span>
         </div>
         <div>
