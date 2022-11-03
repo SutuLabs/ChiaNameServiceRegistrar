@@ -5,9 +5,6 @@ trigger:
   branches:
     include:
       - master
-  paths:
-    exclude:
-      - content/.attachments/*
 
 pool:
   vmImage: "ubuntu-latest"
@@ -65,7 +62,7 @@ stages:
                   inputs:
                     credentialsOption: "serviceEndpoint"
                     serverEndpoint: "cns_site_qa_ftp"
-                    rootDirectory: "$(Pipeline.Workspace)/$(webArtifactName)/b"
+                    rootDirectory: "$(Pipeline.Workspace)/$(webArtifactName)/s/dist"
                     filePatterns: "**"
                     remoteDirectory: "/"
                     clean: false
