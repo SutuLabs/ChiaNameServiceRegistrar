@@ -5,9 +5,6 @@ trigger:
   branches:
     include:
       - master
-  paths:
-    exclude:
-      - content/.attachments/*
 
 pool:
   vmImage: "ubuntu-latest"
@@ -16,6 +13,7 @@ variables:
   versionNumber: "0.1.$(Build.BuildNumber)"
   qaEnvironment: "cns-site-qa"
   prodEnvironment: "cns-site-prod"
+  webArtifactName: chia-name-service
 
 stages:
   - stage: build
@@ -40,29 +38,35 @@ stages:
               script: "yarn build"
             displayName: "yarn build"
 
-  - stage: qa
-    displayName: qa
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-    dependsOn:
-      - build
-    jobs:
-      - deployment: qadeploy
-        displayName: qaDeploy
-        timeoutInMinutes: 10
-        cancelTimeoutInMinutes: 1
-        environment: $(qaEnvironment)
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - task: FtpUpload@2
-                  inputs:
-                    credentialsOption: "serviceEndpoint"
-                    serverEndpoint: "cns_site_qa_ftp"
-                    rootDirectory: "$(Pipeline.Workspace)/drop/b"
-                    filePatterns: "**"
-                    remoteDirectory: "/"
-                    clean: false
-                    cleanContents: false
-                    preservePaths: true
-                    trustSSL: false
+          - task: PublishBuildArtifacts@1
+            inputs:
+            PathtoPublish: '$(Build.SourcesDirectory)/dist/web'
+            ArtifactName: '$(webArtifactName)'
+            publishLocation: 'Container'         
+
+- stage: qa
+  displayName: qa
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  dependsOn:
+  - build
+  jobs:
+  - deployment: qadeploy
+    displayName: qaDeploy
+    timeoutInMinutes: 10
+    cancelTimeoutInMinutes: 1
+    environment: $(qaEnvironment)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: FtpUpload@2
+            inputs:
+              credentialsOption: 'serviceEndpoint'
+              serverEndpoint: '$(qaFtp)'
+              rootDirectory: '$(Pipeline.Workspace)/$(webArtifactName)'
+              filePatterns: '**'
+              remoteDirectory: '/'
+              clean: false
+              cleanContents: false
+              preservePaths: true
+              trustSSL: false
