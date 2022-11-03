@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.0.96",
+    "@scure/base": "^1.1.1",
     "bulma": "^0.9.4",
     "core-js": "^3.8.3",
     "node-sass": "^7.0.3",
