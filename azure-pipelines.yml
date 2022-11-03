@@ -41,11 +41,10 @@ stages:
               script: "yarn build"
             displayName: "yarn build"
 
-          - task: PublishBuildArtifacts@1
+          - task: PublishPipelineArtifact@1
             inputs:
-              PathtoPublish: "$(Build.SourcesDirectory)/dist"
-              ArtifactName: "$(webArtifactName)"
-              publishLocation: "Container"
+              ArtifactName: '${webArtifactName}'
+              targetPath: '$(Pipeline.Workspace)'
 
   - stage: qa
     displayName: qa
@@ -66,7 +65,7 @@ stages:
                   inputs:
                     credentialsOption: "serviceEndpoint"
                     serverEndpoint: "cns_site_qa_ftp"
-                    rootDirectory: "$(Pipeline.Workspace)/drop/b"
+                    rootDirectory: "$(Pipeline.Workspace)/${webArtifactName}"
                     filePatterns: "**"
                     remoteDirectory: "/"
                     clean: false
