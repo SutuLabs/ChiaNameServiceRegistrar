@@ -1,22 +1,22 @@
 <template>
   <div>
     <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
+      <div class="navbar-brand is-clickable" @click="showDetail = false">
         <div class="navbar-item">
-          <img src="@/assets/img/cns-logo.svg" class="logo image is-64x64" />
-          <span class="is-size-4 logo-title">CNS</span>
+          <img src="@/assets/img/cns-logo.svg" class="logo image is-48x48" />
+          <span class="is-size-5 logo-title">CNS</span>
         </div>
       </div>
     </nav>
     <div>
       <div class="mt-10" v-if="!showDetail">
         <img src="@/assets/img/icon.png" class="image is-96x96" style="margin: auto" />
-        <p class="has-text-centered is-size-2 pt-2 pb-6 has-text-color-cns has-text-weight-bold">Chia Name Service</p>
+        <p class="has-text-centered is-size-4 mt-2 mb-5 has-text-color-cns has-text-weight-bold">Chia Name Service</p>
       </div>
       <div class="is-flex is-justify-content-center">
-        <div class="control has-icons-left">
+        <div class="control has-icons-left search-bar">
           <input
-            class="input is-medium search-bar"
+            class="input"
             placeholder="Search for a Chia Domain Name"
             v-model="address"
             type="search"
@@ -42,9 +42,9 @@
                   v-if="resolveAns?.status == 'NotFound'"
                   @click="showResult()"
                 >
-                  <i class="mdi has-text-success mdi-check-circle mdi-24px"></i>
-                  <span class="is-size-4 ml-2 is-flex-grow-2">{{ address }}.xch</span>
-                  <span class="has-text-grey is-size-6"> Available </span>
+                  <i class="mdi has-text-success mdi-check-circle mdi-18px"></i>
+                  <span class="is-size-6 ml-2 is-flex-grow-2">{{ address }}.xch</span>
+                  <span class="has-text-grey is-size-7"> Available </span>
                 </div>
                 <div
                   class="is-flex is-align-items-center is-clickable"
@@ -58,29 +58,29 @@
               </div>
             </div>
           </div>
-          <span class="icon is-medium is-left">
+          <span class="icon is-left">
             <i class="mdi mdi-magnify mdi-36px"></i>
           </span>
         </div>
         <div>
-          <button class="button is-cns is-medium is-loading" v-if="isResolving">Loading</button>
-          <button class="button is-cns is-medium" v-else @click="search()">Search</button>
+          <button class="button is-cns is-loading" v-if="isResolving">Loading</button>
+          <button class="button is-cns" v-else @click="search()">Search</button>
         </div>
       </div>
-      <div v-if="showDetail" class="is-flex is-justify-content-center mt-6">
-        <div class="result">
-          <span class="is-size-3 has-text-grey mb-4">Result</span>
+      <div v-if="showDetail" class="is-flex is-justify-content-center mt-4 mx-4">
+        <div class="column is-5" v-if="resolveAns">
+          <span class="is-size-5 has-text-grey mb-4">Result</span>
           <div class="box mt-4" v-if="resolveAns?.status == 'Found'">
-            <a class="has-text-link is-size-3" :href="`https://${address}.xch.cool`" target="_blank">{{ address }}.xch</a>
+            <a class="has-text-link is-size-5" :href="`https://${address}.xch.cool`" target="_blank">{{ address }}.xch</a>
             <p class="has-text-grey">{{ ownerAddress }}</p>
           </div>
           <div class="box mt-4" v-if="resolveAns?.status == 'NotFound'">
-            <p class="has-text-success is-size-3">{{ address }}.xch</p>
+            <p class="has-text-success is-size-5">{{ address }}.xch</p>
             <a href="https://discord.com/invite/uP68PFVWSN" target="_blank" class="button is-cns mt-3">Go To Register</a>
           </div>
         </div>
       </div>
-      <div class="has-text-centered mt-6 is-size-4">
+      <div class="has-text-centered mt-4 is-size-6">
         >> Go to <a href="https://discord.com/invite/uP68PFVWSN" target="_blank">Discord</a> to register your own CNS.
       </div>
     </div>
@@ -102,7 +102,6 @@ export default class Search extends Vue {
 
   async search(): Promise<void> {
     this.isResolving = true;
-    this.showDetail = false;
     if (this.address.length < 6) {
       this.errorMsg = "The name is too short, at least 6 characters are required.";
       this.isResolving = false;
@@ -126,7 +125,6 @@ export default class Search extends Vue {
 
   reset(): void {
     this.resolveAns = null;
-    this.showDetail = false;
     this.errorMsg = "";
   }
 
@@ -148,6 +146,10 @@ export default class Search extends Vue {
   max-height: 10rem;
 }
 
+.search-bar {
+  min-width: 40vw;
+}
+
 .has-text-color-cns {
   color: #40ac5c;
 }
@@ -157,15 +159,8 @@ export default class Search extends Vue {
   border-color: transparent;
   color: #fff;
 }
-.search-bar {
-  min-width: 40vw;
-}
-
-.result {
-  min-width: 44vw;
-}
 
 .mt-10 {
-  margin-top: 8rem;
+  margin-top: 8vh;
 }
 </style>
