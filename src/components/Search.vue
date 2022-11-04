@@ -68,13 +68,13 @@
           <span class="is-size-5 has-text-grey mb-4">Result</span>
           <div class="box mt-4" v-if="resolveAns?.status == 'Found'">
             <a class="has-text-link is-size-5 break-all" :href="`https://${address}.xch.cool`" target="_blank"
-              >{{ address.toLowerCase() }}.xch</a
+              >{{ address.toLowerCase() }}.xch<i class="mdi mdi-open-in-new"></i></a
             >
             <p class="has-text-grey break-all">{{ ownerAddress }}</p>
           </div>
           <div class="box mt-4" v-if="resolveAns?.status == 'NotFound'">
             <p class="has-text-success is-size-5 break-all">{{ address }}.xch</p>
-            <a href="https://discord.com/invite/uP68PFVWSN" target="_blank" class="button is-cns mt-3">Go to Register</a>
+            <a href="https://discord.com/invite/uP68PFVWSN" target="_blank" class="button is-cns mt-3">Go to Register <i class="mdi mdi-open-in-new"></i></a>
           </div>
         </div>
       </div>
