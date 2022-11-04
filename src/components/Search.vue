@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar p-4" role="navigation" aria-label="main navigation">
       <div class="navbar-brand is-clickable" @click="clear()">
         <div class="navbar-item">
           <img src="@/assets/img/cns-logo.svg" class="logo image is-48x48" />
@@ -34,7 +34,7 @@
                   @click="showResult()"
                 >
                   <i class="mdi has-text-info mdi-arrow-right-bold-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2">{{ address.toLowerCase() }}.xch</span>
+                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ address.toLowerCase() }}.xch</span>
                   <span class="has-text-grey is-size-7"> Registered </span>
                 </div>
                 <div
@@ -43,12 +43,12 @@
                   @click="showResult()"
                 >
                   <i class="mdi has-text-success mdi-check-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2">{{ address.toLowerCase() }}.xch</span>
+                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ address.toLowerCase() }}.xch</span>
                   <span class="has-text-grey is-size-7"> Available </span>
                 </div>
                 <div class="is-flex is-align-items-center is-clickable" v-if="resolveAns?.status == 'Failure'">
                   <i class="mdi has-text-danger mdi-close-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2">{{ address.toLowerCase() }}.xch</span>
+                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ address.toLowerCase() }}.xch</span>
                   <span class="has-text-grey is-size-7"> Failed </span>
                 </div>
               </div>
@@ -67,13 +67,13 @@
         <div class="column is-5" v-if="resolveAns">
           <span class="is-size-5 has-text-grey mb-4">Result</span>
           <div class="box mt-4" v-if="resolveAns?.status == 'Found'">
-            <a class="has-text-link is-size-5" :href="`https://${address}.xch.cool`" target="_blank"
+            <a class="has-text-link is-size-5 break-all" :href="`https://${address}.xch.cool`" target="_blank"
               >{{ address.toLowerCase() }}.xch</a
             >
             <p class="has-text-grey break-all">{{ ownerAddress }}</p>
           </div>
           <div class="box mt-4" v-if="resolveAns?.status == 'NotFound'">
-            <p class="has-text-success is-size-5">{{ address }}.xch</p>
+            <p class="has-text-success is-size-5 break-all">{{ address }}.xch</p>
             <a href="https://discord.com/invite/uP68PFVWSN" target="_blank" class="button is-cns mt-3">Go to Register</a>
           </div>
         </div>
