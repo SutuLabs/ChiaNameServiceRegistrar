@@ -34,7 +34,7 @@
                   @click="showResult()"
                 >
                   <i class="mdi has-text-info mdi-arrow-right-bold-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2">{{ address }}.xch</span>
+                  <span class="is-size-6 ml-2 is-flex-grow-2">{{ address.toLowerCase() }}.xch</span>
                   <span class="has-text-grey is-size-7"> Registered </span>
                 </div>
                 <div
@@ -43,12 +43,12 @@
                   @click="showResult()"
                 >
                   <i class="mdi has-text-success mdi-check-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2">{{ address }}.xch</span>
+                  <span class="is-size-6 ml-2 is-flex-grow-2">{{ address.toLowerCase() }}.xch</span>
                   <span class="has-text-grey is-size-7"> Available </span>
                 </div>
                 <div class="is-flex is-align-items-center is-clickable" v-if="resolveAns?.status == 'Failure'">
                   <i class="mdi has-text-danger mdi-close-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2">{{ address }}.xch</span>
+                  <span class="is-size-6 ml-2 is-flex-grow-2">{{ address.toLowerCase() }}.xch</span>
                   <span class="has-text-grey is-size-7"> Failed </span>
                 </div>
               </div>
@@ -67,8 +67,10 @@
         <div class="column is-5" v-if="resolveAns">
           <span class="is-size-5 has-text-grey mb-4">Result</span>
           <div class="box mt-4" v-if="resolveAns?.status == 'Found'">
-            <a class="has-text-link is-size-5" :href="`https://${address}.xch.cool`" target="_blank">{{ address }}.xch</a>
-            <p class="has-text-grey">{{ ownerAddress }}</p>
+            <a class="has-text-link is-size-5" :href="`https://${address}.xch.cool`" target="_blank"
+              >{{ address.toLowerCase() }}.xch</a
+            >
+            <p class="has-text-grey break-all">{{ ownerAddress }}</p>
           </div>
           <div class="box mt-4" v-if="resolveAns?.status == 'NotFound'">
             <p class="has-text-success is-size-5">{{ address }}.xch</p>
@@ -165,5 +167,9 @@ export default class Search extends Vue {
 
 .mt-10 {
   margin-top: 8vh;
+}
+
+.break-all {
+  word-break: break-all;
 }
 </style>
