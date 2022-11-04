@@ -11,7 +11,7 @@
     <div>
       <div class="mt-10" v-if="!showDetail">
         <img src="@/assets/img/icon.png" class="image is-96x96" style="margin: auto" />
-        <p class="has-text-centered is-size-4 mt-5 mb-5 pb-4 has-text-color-cns has-text-weight-bold">Chia Name Service</p>
+        <p class="has-text-centered is-size-3 mt-5 mb-5 pb-4 has-text-color-cns has-text-weight-bold">Chia Name Service</p>
       </div>
       <div class="is-flex is-justify-content-center">
         <div class="control has-icons-left search-bar">
