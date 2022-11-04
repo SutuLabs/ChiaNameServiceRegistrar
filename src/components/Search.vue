@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand is-clickable" @click="showDetail = false">
+      <div class="navbar-brand is-clickable" @click="clear()">
         <div class="navbar-item">
           <img src="@/assets/img/cns-logo.svg" class="logo image is-48x48" />
           <span class="is-size-5 logo-title">CNS</span>
@@ -11,7 +11,7 @@
     <div>
       <div class="mt-10" v-if="!showDetail">
         <img src="@/assets/img/icon.png" class="image is-96x96" style="margin: auto" />
-        <p class="has-text-centered is-size-4 mt-2 mb-5 has-text-color-cns has-text-weight-bold">Chia Name Service</p>
+        <p class="has-text-centered is-size-4 mt-5 mb-5 pb-4 has-text-color-cns has-text-weight-bold">Chia Name Service</p>
       </div>
       <div class="is-flex is-justify-content-center">
         <div class="control has-icons-left search-bar">
@@ -33,9 +33,9 @@
                   v-if="resolveAns?.status == 'Found'"
                   @click="showResult()"
                 >
-                  <i class="mdi has-text-info mdi-arrow-right-bold-circle mdi-24px"></i>
-                  <span class="is-size-4 ml-2 is-flex-grow-2">{{ address }}.xch</span>
-                  <span class="has-text-grey is-size-6"> Registered </span>
+                  <i class="mdi has-text-info mdi-arrow-right-bold-circle mdi-18px"></i>
+                  <span class="is-size-6 ml-2 is-flex-grow-2">{{ address }}.xch</span>
+                  <span class="has-text-grey is-size-7"> Registered </span>
                 </div>
                 <div
                   class="is-flex is-align-items-center is-clickable"
@@ -46,14 +46,10 @@
                   <span class="is-size-6 ml-2 is-flex-grow-2">{{ address }}.xch</span>
                   <span class="has-text-grey is-size-7"> Available </span>
                 </div>
-                <div
-                  class="is-flex is-align-items-center is-clickable"
-                  v-if="resolveAns?.status == 'Failure'"
-                  @click="showResult()"
-                >
-                  <i class="mdi has-text-danger mdi-close-circle mdi-24px"></i>
-                  <span class="is-size-4 ml-2 is-flex-grow-2">{{ address }}.xch</span>
-                  <span class="has-text-grey is-size-6"> Failed </span>
+                <div class="is-flex is-align-items-center is-clickable" v-if="resolveAns?.status == 'Failure'">
+                  <i class="mdi has-text-danger mdi-close-circle mdi-18px"></i>
+                  <span class="is-size-6 ml-2 is-flex-grow-2">{{ address }}.xch</span>
+                  <span class="has-text-grey is-size-7"> Failed </span>
                 </div>
               </div>
             </div>
@@ -76,11 +72,11 @@
           </div>
           <div class="box mt-4" v-if="resolveAns?.status == 'NotFound'">
             <p class="has-text-success is-size-5">{{ address }}.xch</p>
-            <a href="https://discord.com/invite/uP68PFVWSN" target="_blank" class="button is-cns mt-3">Go To Register</a>
+            <a href="https://discord.com/invite/uP68PFVWSN" target="_blank" class="button is-cns mt-3">Go to Register</a>
           </div>
         </div>
       </div>
-      <div class="has-text-centered mt-4 is-size-6">
+      <div class="has-text-centered mt-5 pt-4 is-size-6">
         >> Go to <a href="https://discord.com/invite/uP68PFVWSN" target="_blank">Discord</a> to register your own CNS.
       </div>
     </div>
@@ -124,6 +120,13 @@ export default class Search extends Vue {
   }
 
   reset(): void {
+    this.resolveAns = null;
+    this.errorMsg = "";
+  }
+
+  clear(): void {
+    this.showDetail = false;
+    this.address = "";
     this.resolveAns = null;
     this.errorMsg = "";
   }
