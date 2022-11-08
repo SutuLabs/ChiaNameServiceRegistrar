@@ -1,5 +1,6 @@
 <template>
   <Search />
+  <notifications />
 </template>
 
 <script lang="ts">

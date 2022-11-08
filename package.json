@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@kyvg/vue3-notification": "^2.6.1",
     "@mdi/font": "^7.0.96",
     "@scure/base": "^1.1.1",
     "bulma": "^0.9.4",

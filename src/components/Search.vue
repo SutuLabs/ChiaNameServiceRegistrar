@@ -18,7 +18,7 @@
           <input
             class="input"
             placeholder="Search for a Chia Domain Name"
-            v-model="address"
+            v-model="name"
             type="search"
             :maxlength="63"
             @input.enter="reset()"
@@ -34,7 +34,7 @@
                   @click="showResult()"
                 >
                   <i class="mdi has-text-info mdi-arrow-right-bold-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ address.toLowerCase() }}.xch</span>
+                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ name.toLowerCase() }}.xch</span>
                   <span class="has-text-grey is-size-7"> Registered </span>
                 </div>
                 <div
@@ -43,12 +43,12 @@
                   @click="showResult()"
                 >
                   <i class="mdi has-text-success mdi-check-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ address.toLowerCase() }}.xch</span>
+                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ name.toLowerCase() }}.xch</span>
                   <span class="has-text-grey is-size-7"> Available </span>
                 </div>
                 <div class="is-flex is-align-items-center is-clickable" v-if="resolveAns?.status == 'Failure'">
                   <i class="mdi has-text-danger mdi-close-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ address.toLowerCase() }}.xch</span>
+                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ name.toLowerCase() }}.xch</span>
                   <span class="has-text-grey is-size-7"> Failed </span>
                 </div>
               </div>
@@ -58,23 +58,44 @@
             <i class="mdi mdi-magnify mdi-18px"></i>
           </span>
         </div>
-        <div>
-          <button class="button is-cns is-loading" v-if="isResolving">Loading</button>
-          <button class="button is-cns" v-else @click="search()">Search</button>
-        </div>
+        <p class="control">
+          <a class="button is-cns is-loading" v-if="isResolving">Loading</a>
+          <a class="button is-cns" v-else @click="search()">Search</a>
+        </p>
       </div>
       <div v-if="showDetail" class="is-flex is-justify-content-center mt-4 mx-4">
         <div class="column is-5" v-if="resolveAns">
           <span class="is-size-5 has-text-grey mb-4">Result</span>
           <div class="box mt-4" v-if="resolveAns?.status == 'Found'">
-            <a class="has-text-link is-size-5 break-all" :href="`https://${address}.xch.cool`" target="_blank"
-              >{{ address.toLowerCase() }}.xch<i class="mdi mdi-open-in-new"></i></a
-            >
+            <a class="has-text-link is-size-5 break-all" :href="`https://${name}.xch.cool`" target="_blank"
+              >{{ name.toLowerCase() }}.xch<i class="mdi mdi-open-in-new"></i
+            ></a>
             <p class="has-text-grey break-all">{{ ownerAddress }}</p>
           </div>
-          <div class="box mt-4" v-if="resolveAns?.status == 'NotFound'">
-            <p class="has-text-success is-size-5 break-all">{{ address }}.xch</p>
-            <a href="https://discord.com/invite/uP68PFVWSN" target="_blank" class="button is-cns mt-3">Go to Register <i class="mdi mdi-open-in-new"></i></a>
+          <div class="card mt-4" v-if="resolveAns?.status == 'NotFound'">
+            <header class="card-header">
+              <p class="card-header-title break-all">{{ name }}.xch</p>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                <p>
+                  <span class="is-size-5 has-text-weight-bold">{{ name }}.xch </span
+                  ><span class="has-text-success"><i class="mdi mdi-check-circle mdi-18px"></i>AVAILABLE</span>
+                </p>
+                <p>
+                  <span class="is-size-6 has-text-grey">Registration Period</span><span class="is-pulled-right"> 1 Year </span>
+                </p>
+                <p>
+                  <span class="is-size-6 has-text-grey">Registration Price</span
+                  ><span class="is-pulled-right">{{ price.price / 100000000000 }} XCH</span>
+                </p>
+                <p>
+                  <span class="is-size-6 has-text-grey">Royalty Percentage</span
+                  ><span class="is-pulled-right">{{ price.royaltyPercentage / 100 }} %</span>
+                </p>
+              </div>
+              <div class="has-text-right"><button class="button is-cns" @click="showModal = true">Register</button></div>
+            </div>
           </div>
         </div>
       </div>
@@ -82,35 +103,107 @@
         >> Go to <a href="https://discord.com/invite/uP68PFVWSN" target="_blank">Discord</a> to register your own CNS.
       </div>
     </div>
+    <div :class="{ modal: true, 'is-active': showModal }">
+      <div class="modal-background"></div>
+      <div class="modal-card" v-if="!offer">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Register {{ name }}.xch</p>
+          <button class="delete" aria-label="close" @click="showModal = false"></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+              <input class="input" type="text" disabled :value="name + '.xch'" />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Address</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="xch1..." v-model="address" @input.enter="registerErrMsg = ''" />
+            </div>
+            <p class="has-text-danger is-size-6" v-if="registerErrMsg">{{ registerErrMsg }}</p>
+          </div>
+        </section>
+        <footer class="modal-card-foot is-block">
+          <button class="button" @click="showModal = false">Cancel</button>
+          <button
+            :class="{ button: true, 'is-cns': true, 'is-pulled-right': true, 'is-loading': registering }"
+            @keyup.enter="register()"
+            @click="register()"
+          >
+            Register
+          </button>
+        </footer>
+      </div>
+      <div class="modal-card" v-else>
+        <header class="modal-card-head">
+          <p class="modal-card-title">Select Registration Method</p>
+          <button
+            class="delete"
+            aria-label="close"
+            @click="
+              showModal = false;
+              clear();
+            "
+          ></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="columns is-align-items-start m-3">
+            <div class="column is-5 box has-text-centered mr-6 ml-3 is-clickable" @click="copy(offer)">
+              <i class="mdi mdi-arrow-collapse-down mdi-48px"></i>
+              <p>Take Offer</p>
+              <p>
+                <a class="mr-4" :href="offerUri" :download="name + '.offer'" @click.stop="">Download</a
+                ><a @click.stop="copy(offer)">Copy</a>
+              </p>
+            </div>
+            <div class="column is-5 box has-text-centered is-clickable">
+              <img class="p-2" src="@/assets/img/logo-48x48.png" />
+              <p class="pb-5">Register by Pawket</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
+import { getPrice, Price, register } from "@/service/cns-register";
 import { ResolveFailureAnswer, resolveName, StandardResolveAnswer } from "@/service/resolveName";
 import { bech32m } from "@scure/base";
 import { Vue } from "vue-class-component";
 
 export default class Search extends Vue {
-  public address = "";
+  public name = "";
   public resolveAns: StandardResolveAnswer | ResolveFailureAnswer | null = null;
   public isResolving = false;
   public showDetail = false;
   public ownerAddress = "";
   public errorMsg = "";
+  public showModal = false;
+  public address = "";
+  public period = 1;
+  public price: Price = { price: -1, royaltyPercentage: -1 };
+  public registerErrMsg = "";
+  public offer = "";
+  public registering = false;
 
   async search(): Promise<void> {
     this.isResolving = true;
-    if (this.address.length < 6) {
+    if (this.name.length < 6) {
       this.errorMsg = "The name is too short, at least 6 characters are required.";
       this.isResolving = false;
       return;
     }
-    this.resolveAns = await resolveName(`${this.address}.xch`);
+    this.resolveAns = await resolveName(`${this.name}.xch`);
     if (this.resolveAns.status != "Failure") {
       this.ownerAddress = bech32m.encode(
         "xch",
         bech32m.toWords(this.fromHexString((this.resolveAns as StandardResolveAnswer).data ?? ""))
       );
+      if (this.resolveAns.status == "NotFound") await this.getPrice();
     }
 
     this.isResolving = false;
@@ -121,6 +214,32 @@ export default class Search extends Vue {
     return;
   }
 
+  async getPrice(): Promise<void> {
+    this.price = await getPrice(`${this.name}.xch`);
+  }
+
+  async register(): Promise<void> {
+    this.registering = true;
+    if (!this.address.startsWith("xch1")) {
+      this.registerErrMsg = "address should start with xch1";
+      this.registering = false;
+      return;
+    }
+    const res = await register(`${this.name}.xch`, this.address);
+    if (res?.success) {
+      this.offer = res.offer ?? "";
+      this.address = "";
+    } else {
+      this.$notify({
+        title: "Register Failed",
+        text: res?.reason ?? "Unknown Error",
+        type: "error",
+        duration: 5000,
+      });
+    }
+    this.registering = false;
+  }
+
   reset(): void {
     this.resolveAns = null;
     this.errorMsg = "";
@@ -128,9 +247,40 @@ export default class Search extends Vue {
 
   clear(): void {
     this.showDetail = false;
-    this.address = "";
+    this.name = "";
     this.resolveAns = null;
     this.errorMsg = "";
+    this.registerErrMsg = "";
+    this.address = "";
+    this.offer = "";
+  }
+
+  copy(copyText: string): void {
+    const textArea = document.createElement("textarea");
+    textArea.value = copyText;
+
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      document.execCommand("copy");
+    } catch (err) {
+      console.warn("failed to copy: ", err);
+    }
+
+    document.body.removeChild(textArea);
+    this.$notify("Copied");
+  }
+
+  get offerUri(): string {
+    const dataPrefix = "data:text/txt;charset=utf-8";
+    const content = `${dataPrefix},${this.offer}`;
+    return encodeURI(content);
   }
 
   fromHexString(hexString: string): Uint8Array {
