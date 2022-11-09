@@ -144,23 +144,24 @@
             aria-label="close"
             @click="
               showModal = false;
-              clear();
+              address = '';
+              offer = '';
             "
           ></button>
         </header>
         <section class="modal-card-body">
           <div class="columns is-align-items-start m-3">
-            <div class="column is-5 box has-text-centered mr-6 ml-3 is-clickable" @click="copy(offer)">
+            <div class="column is-5 box has-text-centered mr-6 ml-3">
               <i class="mdi mdi-arrow-collapse-down mdi-48px"></i>
-              <p>Take Offer</p>
+              <p class="is-size-5">Take Offer</p>
               <p>
-                <a class="mr-4" :href="offerUri" :download="name + '.offer'" @click.stop="">Download</a
+                <a class="mr-4" :href="offerUri" :download="name + '.xch.offer'" @click.stop="">Download</a
                 ><a @click.stop="copy(offer)">Copy</a>
               </p>
             </div>
-            <div class="column is-5 box has-text-centered is-clickable">
+            <div class="column is-5 box has-text-centered">
               <img class="p-2" src="@/assets/img/logo-48x48.png" />
-              <p class="pb-5">Register by Pawket</p>
+              <p class="pb-5 is-size-5">Register by Pawket</p>
             </div>
           </div>
         </section>
