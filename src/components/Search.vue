@@ -159,7 +159,7 @@
                 ><a @click.stop="copy(offer)">Copy</a>
               </p>
             </div>
-            <div class="column is-5 box has-text-centered">
+            <div class="column is-5 box has-text-centered" @click="openPawket()">
               <img class="p-2" src="@/assets/img/logo-48x48.png" />
               <p class="pb-5 is-size-5">Register by Pawket</p>
             </div>
@@ -241,8 +241,15 @@ export default class Search extends Vue {
     this.registering = false;
   }
 
+  openPawket(): void {
+    const baseUrl = "https://wallet.pr.supernova.uchaindb.com/";
+    const pawket = window.open(`${baseUrl}#/connect`, "Pawket", "width=390,height=844");
+    setTimeout(() => pawket?.postMessage(JSON.stringify({ app: "take-offer", data: this.offer }), baseUrl), 1000);
+  }
+
   reset(): void {
     this.resolveAns = null;
+    1;
     this.errorMsg = "";
   }
 
