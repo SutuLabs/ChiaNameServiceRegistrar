@@ -93,14 +93,15 @@
                   <span class="is-size-6 has-text-grey">Royalty Percentage</span
                   ><span class="is-pulled-right">{{ price.royaltyPercentage / 100 }} %</span>
                 </p>
+                <p>
+                  <span class="is-size-6 has-text-grey">Total</span
+                  ><span class="is-pulled-right">{{ (price.price + price.royaltyPercentage) / 100000000000 }} XCH</span>
+                </p>
               </div>
               <div class="has-text-right"><button class="button is-cns" @click="showModal = true">Register</button></div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="has-text-centered mt-5 pt-4 is-size-6">
-        >> Go to <a href="https://discord.com/invite/uP68PFVWSN" target="_blank">Discord</a> to register your own CNS.
       </div>
     </div>
     <div :class="{ modal: true, 'is-active': showModal }">
@@ -159,7 +160,7 @@
                 ><a @click.stop="copy(offer)">Copy</a>
               </p>
             </div>
-            <div class="column is-5 box has-text-centered" @click="openPawket()">
+            <div class="column is-5 box has-text-centered is-clickable" @click="openPawket()">
               <img class="p-2" src="@/assets/img/logo-48x48.png" />
               <p class="pb-5 is-size-5">Register by Pawket</p>
             </div>
@@ -167,6 +168,11 @@
         </section>
       </div>
     </div>
+    <footer class="is-fixed-bottom my-6 px-4 has-text-centered">
+      <a href="https://discord.com/invite/uP68PFVWSN" class="has-text-grey" target="_blank">Discord</a>
+      |
+      <a href=" https://twitter.com/ChiaNameService" target="_blank" class="has-text-grey">Twitter</a>
+    </footer>
   </div>
 </template>
 
@@ -329,5 +335,11 @@ export default class Search extends Vue {
 
 .break-all {
   word-break: break-all;
+}
+
+.is-fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
 }
 </style>
