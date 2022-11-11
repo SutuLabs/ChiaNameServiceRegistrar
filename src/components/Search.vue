@@ -254,7 +254,18 @@ export default class Search extends Vue {
   openPawket(): void {
     const baseUrl = "https://wallet.pr.supernova.uchaindb.com/";
     const pawket = window.open(`${baseUrl}#/connect`, "Pawket", "width=390,height=844");
-    setTimeout(() => pawket?.postMessage(JSON.stringify({ app: "take-offer", data: this.offer }), baseUrl), 2000);
+    setTimeout(
+      () =>
+        pawket?.postMessage(
+          JSON.stringify({
+            app: "take-offer",
+            data: this.offer,
+            network: "ccd5bb71183532bff220ba46c268991a3ff07eb358e8255a65c30a2dce0e5fbb",
+          }),
+          baseUrl
+        ),
+      2000
+    );
   }
 
   reset(): void {
