@@ -95,7 +95,9 @@
                 </p>
                 <p>
                   <span class="is-size-6 has-text-grey">Total</span
-                  ><span class="is-pulled-right">{{ (price.price + price.royaltyPercentage) / 100000000000 }} XCH</span>
+                  ><span class="is-pulled-right"
+                    >{{ (price.price * (10000 + price.royaltyPercentage)) / 1000000000000000 }} XCH</span
+                  >
                 </p>
               </div>
               <div class="has-text-right"><button class="button is-cns" @click="showModal = true">Register</button></div>
@@ -154,7 +156,9 @@
           <div class="columns is-align-items-start m-3">
             <div class="column is-5 box has-text-centered mr-6 ml-3">
               <i class="mdi mdi-arrow-collapse-down mdi-48px"></i>
-              <p class="is-size-5">Take Offer</p>
+              <p class="is-size-5">
+                Take Offer <i class="mdi mdi-help-circle" title="You can take this offer in Chia official wallet or Pawket."></i>
+              </p>
               <p>
                 <a class="mr-4" :href="offerUri" :download="name + '.xch.offer'" @click.stop="">Download</a
                 ><a @click.stop="copy(offer)">Copy</a>
