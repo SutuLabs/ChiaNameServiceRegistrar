@@ -172,7 +172,7 @@
         </section>
       </div>
     </div>
-    <footer class="is-fixed-bottom my-6 px-4 has-text-centered">
+    <footer class="is-fixed-bottom py-4 px-4 has-text-centered has-background-white-ter">
       <a href="https://discord.com/invite/uP68PFVWSN" class="has-text-grey" target="_blank">Discord</a>
       |
       <a href=" https://twitter.com/ChiaNameService" target="_blank" class="has-text-grey">Twitter</a>
@@ -254,7 +254,7 @@ export default class Search extends Vue {
   openPawket(): void {
     const baseUrl = "https://wallet.pr.supernova.uchaindb.com/";
     const pawket = window.open(`${baseUrl}#/connect`, "Pawket", "width=390,height=844");
-    setTimeout(() => pawket?.postMessage(JSON.stringify({ app: "take-offer", data: this.offer }), baseUrl), 1000);
+    setTimeout(() => pawket?.postMessage(JSON.stringify({ app: "take-offer", data: this.offer }), baseUrl), 2000);
   }
 
   reset(): void {
