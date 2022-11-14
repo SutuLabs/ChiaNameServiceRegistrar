@@ -87,7 +87,7 @@
                 </p>
                 <p>
                   <span class="is-size-6 has-text-grey">Registration Price</span
-                  ><span class="is-pulled-right">{{ price.price / 100000000000 }} XCH</span>
+                  ><span class="is-pulled-right">{{ price.price / 1000000000000 }} XCH</span>
                 </p>
                 <p>
                   <span class="is-size-6 has-text-grey">Royalty Percentage</span
@@ -96,7 +96,7 @@
                 <p>
                   <span class="is-size-6 has-text-grey">Total</span
                   ><span class="is-pulled-right"
-                    >{{ (price.price * (10000 + price.royaltyPercentage)) / 1000000000000000 }} XCH</span
+                    >{{ (price.price * (10000 + price.royaltyPercentage)) / 10000000000000000 }} XCH</span
                   >
                 </p>
               </div>
@@ -198,7 +198,7 @@ export default class Search extends Vue {
   public period = 1;
   public price: Price = { price: -1, royaltyPercentage: -1 };
   public registerErrMsg = "";
-  public offer = "";
+  public offer = "xxxxxx";
   public registering = false;
 
   async search(): Promise<void> {
@@ -252,7 +252,7 @@ export default class Search extends Vue {
   }
 
   openPawket(): void {
-    const baseUrl = "https://wallet.pr.supernova.uchaindb.com/";
+    const baseUrl = "http://localhost:8080/";
     const pawket = window.open(`${baseUrl}#/connect`, "Pawket", "width=390,height=844");
     setTimeout(
       () =>
