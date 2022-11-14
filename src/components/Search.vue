@@ -198,7 +198,7 @@ export default class Search extends Vue {
   public period = 1;
   public price: Price = { price: -1, royaltyPercentage: -1 };
   public registerErrMsg = "";
-  public offer = "xxxxxx";
+  public offer = "";
   public registering = false;
 
   async search(): Promise<void> {
@@ -252,7 +252,7 @@ export default class Search extends Vue {
   }
 
   openPawket(): void {
-    const baseUrl = "http://localhost:8080/";
+    const baseUrl = "https://wallet.pr.supernova.uchaindb.com/";
     const pawket = window.open(`${baseUrl}#/connect`, "Pawket", "width=390,height=844");
     setTimeout(
       () =>
