@@ -4,7 +4,7 @@
       <div class="navbar-brand is-clickable" @click="clear()">
         <div class="navbar-item">
           <img src="@/assets/img/cns-logo.svg" class="logo image is-48x48" />
-          <span class="is-size-5 logo-title">CNS</span>
+          <span class="is-size-5 logo-title">CNS test</span>
         </div>
       </div>
     </nav>
