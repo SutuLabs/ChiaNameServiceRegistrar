@@ -127,19 +127,6 @@
             </div>
           </div>
           <div class="field">
-            <label class="label">Royalty Address</label>
-            <div class="control">
-              <input
-                class="input"
-                type="text"
-                placeholder="xch1..."
-                v-model="royaltyAddress"
-                @input.enter="registerErrMsg = ''"
-              />
-            </div>
-            <p class="has-text-danger is-size-6" v-if="registerErrMsg">{{ registerErrMsg }}</p>
-          </div>
-          <div class="field">
             <label class="label">Address</label>
             <div class="control">
               <input class="input" type="text" placeholder="xch1..." v-model="address" />
@@ -224,7 +211,6 @@ import { Vue } from "vue-class-component";
 
 export default class Search extends Vue {
   public name = "";
-  public royaltyAddress = "";
   public address = "";
   public did = "";
   public publicKey = "";
@@ -271,7 +257,7 @@ export default class Search extends Vue {
 
   async register(): Promise<void> {
     this.registering = true;
-    const res = await register(`${this.name}.xch`, this.royaltyAddress, this.address, this.publicKey, this.did, this.text);
+    const res = await register(`${this.name}.xch`, this.address, this.publicKey, this.did, this.text);
     if (res?.success) {
       this.offer = res.offer ?? "";
       this.address = "";

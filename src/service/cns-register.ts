@@ -43,7 +43,7 @@ export async function getPrice(name: string): Promise<Price> {
     }
 }
 
-export async function register(name: string, royaltyAddress = "", address = "", publicKey = "", did = "", text = ""): Promise<RegisterResponse | null> {
+export async function register(name: string, address = "", publicKey = "", did = "", text = ""): Promise<RegisterResponse | null> {
     try {
         const resp = await fetch(baseUrl + "register", {
             method: "POST",
@@ -53,7 +53,6 @@ export async function register(name: string, royaltyAddress = "", address = "", 
             },
             body: JSON.stringify({
                 name: name,
-                royaltyAddress: royaltyAddress,
                 address: address,
                 publicKey: publicKey,
                 did: did,
