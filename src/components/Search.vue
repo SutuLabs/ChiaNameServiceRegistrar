@@ -10,8 +10,14 @@
     </nav>
     <div>
       <div class="mt-10" v-if="!showDetail">
-        <img src="@/assets/img/icon.png" class="image is-96x96" style="margin: auto" />
-        <p class="has-text-centered is-size-3 mt-5 mb-5 pb-4 has-text-color-cns has-text-weight-bold">Chia Name Service</p>
+        <img src="@/assets/img/icon.jpg" class="image is-96x96" style="margin: auto" />
+        <p class="has-text-centered is-size-3 mt-5 has-text-color-cns has-text-weight-bold">Chia Name Service</p>
+        <p class="has-text-centered mb-5 pb-4">
+          (Test Only)<i
+            class="mdi mdi-help-circle"
+            title="Testing is expected to end in December 2022. Please note that all names registered during the test period will be invalid. Welcome to re-register your name after the official launch of CNS."
+          ></i>
+        </p>
       </div>
       <div class="is-flex is-justify-content-center">
         <div class="control has-icons-left search-bar">
