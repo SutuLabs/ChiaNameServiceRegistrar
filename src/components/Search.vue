@@ -127,11 +127,41 @@
             </div>
           </div>
           <div class="field">
-            <label class="label">Address</label>
+            <label class="label">Royalty Address</label>
             <div class="control">
-              <input class="input" type="text" placeholder="xch1..." v-model="address" @input.enter="registerErrMsg = ''" />
+              <input
+                class="input"
+                type="text"
+                placeholder="xch1..."
+                v-model="royaltyAddress"
+                @input.enter="registerErrMsg = ''"
+              />
             </div>
             <p class="has-text-danger is-size-6" v-if="registerErrMsg">{{ registerErrMsg }}</p>
+          </div>
+          <div class="field">
+            <label class="label">Address</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="xch1..." v-model="address" />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Did</label>
+            <div class="control">
+              <input class="input" type="text" v-model="did" />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">PublicKey</label>
+            <div class="control">
+              <input class="input" type="text" v-model="publicKey" />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Text</label>
+            <div class="control">
+              <input class="input" type="text" v-model="text" />
+            </div>
           </div>
         </section>
         <footer class="modal-card-foot is-block">
@@ -194,13 +224,17 @@ import { Vue } from "vue-class-component";
 
 export default class Search extends Vue {
   public name = "";
+  public royaltyAddress = "";
+  public address = "";
+  public did = "";
+  public publicKey = "";
+  public text = "";
   public resolveAns: StandardResolveAnswer | ResolveFailureAnswer | null = null;
   public isResolving = false;
   public showDetail = false;
   public ownerAddress = "";
   public errorMsg = "";
   public showModal = false;
-  public address = "";
   public period = 1;
   public price: Price = { price: -1, royaltyPercentage: -1 };
   public registerErrMsg = "";
@@ -237,12 +271,7 @@ export default class Search extends Vue {
 
   async register(): Promise<void> {
     this.registering = true;
-    if (!this.address.startsWith("xch1")) {
-      this.registerErrMsg = "address should start with xch1";
-      this.registering = false;
-      return;
-    }
-    const res = await register(`${this.name}.xch`, this.address);
+    const res = await register(`${this.name}.xch`, this.royaltyAddress, this.address, this.publicKey, this.did, this.text);
     if (res?.success) {
       this.offer = res.offer ?? "";
       this.address = "";

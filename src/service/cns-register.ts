@@ -43,7 +43,7 @@ export async function getPrice(name: string): Promise<Price> {
     }
 }
 
-export async function register(name: string, address: string): Promise<RegisterResponse | null> {
+export async function register(name: string, royaltyAddress = "", address = "", publicKey = "", did = "", text = ""): Promise<RegisterResponse | null> {
     try {
         const resp = await fetch(baseUrl + "register", {
             method: "POST",
@@ -52,7 +52,12 @@ export async function register(name: string, address: string): Promise<RegisterR
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                name, royaltyAddress: address, address: address,
+                name: name,
+                royaltyAddress: royaltyAddress,
+                address: address,
+                publicKey: publicKey,
+                did: did,
+                text: text
             }),
         });
         const qresp = (await resp.json()) as RegisterResponse;
