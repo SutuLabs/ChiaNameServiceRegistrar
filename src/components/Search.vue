@@ -127,27 +127,10 @@
             </div>
           </div>
           <div class="field">
-            <label class="label">Address</label>
+            <label class="label">Address(Optional)</label>
             <div class="control">
+              <p class="is-size-7 has-text-grey">If not filled, the owner address will be bound by default.</p>
               <input class="input" type="text" placeholder="xch1..." v-model="address" />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Did</label>
-            <div class="control">
-              <input class="input" type="text" v-model="did" />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">PublicKey</label>
-            <div class="control">
-              <input class="input" type="text" v-model="publicKey" />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Text</label>
-            <div class="control">
-              <input class="input" type="text" v-model="text" />
             </div>
           </div>
         </section>
@@ -212,9 +195,6 @@ import { Vue } from "vue-class-component";
 export default class Search extends Vue {
   public name = "";
   public address = "";
-  public did = "";
-  public publicKey = "";
-  public text = "";
   public resolveAns: StandardResolveAnswer | ResolveFailureAnswer | null = null;
   public isResolving = false;
   public showDetail = false;
@@ -257,7 +237,7 @@ export default class Search extends Vue {
 
   async register(): Promise<void> {
     this.registering = true;
-    const res = await register(`${this.name}.xch`, this.address, this.publicKey, this.did, this.text);
+    const res = await register(`${this.name}.xch`, this.address);
     if (res?.success) {
       this.offer = res.offer ?? "";
       this.address = "";
