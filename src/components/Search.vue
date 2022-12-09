@@ -31,7 +31,7 @@
             @keyup.enter="search()"
           />
           <p v-if="errorMsg" class="has-text-danger">{{ errorMsg }}</p>
-          <div id="dropdown-menu" role="menu" v-if="!showDetail && resolveAns">
+          <div id="dropdown-menu" role="menu" v-if="!showDetail && resolveAns && !isResolving">
             <div class="dropdown-content">
               <div class="dropdown-item">
                 <div
@@ -52,6 +52,14 @@
                   <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ name.toLowerCase() }}.xch</span>
                   <span class="has-text-grey is-size-7"> Available </span>
                 </div>
+                <div
+                  class="is-flex is-align-items-center is-clickable"
+                  v-else-if="resolveAns?.status == 'NotFound' && price.price < 0"
+                >
+                  <i class="mdi has-text-danger mdi-close-circle mdi-18px"></i>
+                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ name.toLowerCase() }}.xch</span>
+                  <span class="has-text-grey is-size-7"> Unavailable </span>
+                </div>
                 <div class="is-flex is-align-items-center is-clickable" v-else>
                   <i class="mdi has-text-danger mdi-close-circle mdi-18px"></i>
                   <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ name.toLowerCase() }}.xch</span>
@@ -69,7 +77,7 @@
           <a class="button is-cns" v-else @click="search()">Search</a>
         </p>
       </div>
-      <div v-if="showDetail" class="is-flex is-justify-content-center mt-4 mx-4">
+      <div v-if="showDetail && !isResolving" class="is-flex is-justify-content-center mt-4 mx-4">
         <div class="column is-5" v-if="resolveAns">
           <span class="is-size-5 has-text-grey mb-4">Result</span>
           <div class="box mt-4" v-if="resolveAns?.status == 'Found'">
@@ -78,7 +86,7 @@
             ></a>
             <p class="has-text-grey break-all">{{ ownerAddress }}</p>
           </div>
-          <div class="card mt-4" v-if="resolveAns?.status == 'NotFound'">
+          <div class="card mt-4" v-else-if="resolveAns?.status == 'NotFound' && price.price > 0">
             <header class="card-header">
               <p class="card-header-title break-all">{{ name }}.xch</p>
             </header>
@@ -107,6 +115,19 @@
                 </p>
               </div>
               <div class="has-text-right"><button class="button is-cns" @click="showModal = true">Register</button></div>
+            </div>
+          </div>
+          <div class="card mt-4" v-else>
+            <header class="card-header">
+              <p class="card-header-title break-all">{{ name }}.xch</p>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                <p>
+                  <span class="is-size-5 has-text-weight-bold">{{ name }}.xch </span
+                  ><span class="has-text-danger"><i class="mdi mdi-close-circle mdi-18px"></i>UNAVAILABLE</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -209,6 +230,7 @@ export default class Search extends Vue {
 
   async search(): Promise<void> {
     this.isResolving = true;
+    this.name = this.name.replace(/\s/g, "");
     this.name = this.name.split(".")[0];
     if (this.name.length < 6) {
       this.errorMsg = "The name is too short, at least 6 characters are required.";
@@ -272,7 +294,7 @@ export default class Search extends Vue {
 
   reset(): void {
     this.resolveAns = null;
-    1;
+    this.price = { price: -1, royaltyPercentage: -1 };
     this.errorMsg = "";
   }
 
