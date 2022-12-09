@@ -45,14 +45,14 @@
                 </div>
                 <div
                   class="is-flex is-align-items-center is-clickable"
-                  v-if="resolveAns?.status == 'NotFound'"
+                  v-else-if="resolveAns?.status == 'NotFound' && price.price > 0"
                   @click="showResult()"
                 >
                   <i class="mdi has-text-success mdi-check-circle mdi-18px"></i>
                   <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ name.toLowerCase() }}.xch</span>
                   <span class="has-text-grey is-size-7"> Available </span>
                 </div>
-                <div class="is-flex is-align-items-center is-clickable" v-if="resolveAns?.status == 'Failure'">
+                <div class="is-flex is-align-items-center is-clickable" v-else>
                   <i class="mdi has-text-danger mdi-close-circle mdi-18px"></i>
                   <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ name.toLowerCase() }}.xch</span>
                   <span class="has-text-grey is-size-7"> Failed </span>
@@ -209,6 +209,7 @@ export default class Search extends Vue {
 
   async search(): Promise<void> {
     this.isResolving = true;
+    this.name = this.name.split(".")[0];
     if (this.name.length < 6) {
       this.errorMsg = "The name is too short, at least 6 characters are required.";
       this.isResolving = false;
