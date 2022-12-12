@@ -23,7 +23,7 @@ export interface RegisterResponse {
     code?: string,
 }
 
-const royaltyAddress = "xch1q0dh0a7y7lal22z8qh4s28lkaymxkcv6au9l9hwf4qv73ckq7was5amkz8"
+const royaltyAddress = ""
 
 export async function getPrice(name: string): Promise<Price> {
     try {
