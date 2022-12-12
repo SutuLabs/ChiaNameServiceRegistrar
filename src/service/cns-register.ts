@@ -23,6 +23,8 @@ export interface RegisterResponse {
     code?: string,
 }
 
+const royaltyAddress = "xch1q0dh0a7y7lal22z8qh4s28lkaymxkcv6au9l9hwf4qv73ckq7was5amkz8"
+
 export async function getPrice(name: string): Promise<Price> {
     try {
         const resp = await fetch(baseUrl + "price?" + new URLSearchParams({
@@ -53,6 +55,7 @@ export async function register(name: string, address = "", publicKey = "", did =
             },
             body: JSON.stringify({
                 name: name,
+                royaltyAddress: royaltyAddress,
                 address: address,
                 publicKey: publicKey,
                 did: did,
