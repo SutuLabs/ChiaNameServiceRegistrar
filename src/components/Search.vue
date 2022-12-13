@@ -3,15 +3,15 @@
     <nav class="navbar p-4" role="navigation" aria-label="main navigation">
       <div class="navbar-brand is-clickable" @click="clear()">
         <div class="navbar-item">
-          <img src="@/assets/img/cns-logo.svg" class="logo image is-48x48" />
-          <span class="is-size-5 logo-title">CNS test</span>
+          <img src="@/assets/img/cns-logo.png" class="logo image is-48x48" />
+          <span class="is-size-5 has-text-weight-bold has-text-white">CNS test</span>
         </div>
       </div>
     </nav>
     <div>
       <div class="mt-10" v-if="!showDetail">
-        <img src="@/assets/img/icon.jpg" class="image is-96x96" style="margin: auto" />
-        <p class="has-text-centered is-size-3 mt-5 has-text-color-cns has-text-weight-bold">Chia Name Service</p>
+        <img src="@/assets/img/cns-logo.png" class="image is-96x96" style="margin: auto" />
+        <p class="has-text-centered is-size-3 mt-5 has-text-white has-text-weight-bold">Chia Name Service</p>
         <p class="has-text-centered mb-5 pb-4">
           (Test Only)<i
             class="mdi mdi-help-circle"
@@ -199,10 +199,9 @@
         </section>
       </div>
     </div>
-    <footer class="is-fixed-bottom py-4 px-4 has-text-centered has-background-white-ter">
-      <a href="https://discord.com/invite/uP68PFVWSN" class="has-text-grey" target="_blank">Discord</a>
-      |
-      <a href=" https://twitter.com/ChiaNameService" target="_blank" class="has-text-grey">Twitter</a>
+    <footer class="is-fixed-bottom py-4 px-4 has-text-centered">
+      <a href="https://discord.com/invite/uP68PFVWSN" class="has-text-white" target="_blank">Discord </a>
+      <a href=" https://twitter.com/ChiaNameService" target="_blank" class="has-text-white">| Twitter</a>
     </footer>
   </div>
 </template>
@@ -345,10 +344,6 @@ export default class Search extends Vue {
 }
 </script>
 <style scoped lang="scss">
-.logo-title {
-  font-weight: bold;
-  color: #40ac5c;
-}
 
 .logo {
   max-height: 10rem;
@@ -380,5 +375,9 @@ export default class Search extends Vue {
   position: fixed;
   bottom: 0;
   width: 100vw;
+}
+
+.navbar {
+  background-color: transparent;
 }
 </style>

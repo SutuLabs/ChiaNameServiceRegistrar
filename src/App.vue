@@ -15,4 +15,9 @@ import Search from "./components/Search.vue";
 export default class App extends Vue {}
 </script>
 
-<style></style>
+<style>
+html {
+  height: 100%;
+  background-image: linear-gradient(#83f4a0, #68c781, #3fe8ad, #6db4d1);
+}
+</style>
