@@ -18,7 +18,7 @@ export default class App extends Vue {}
 <style>
 html {
   height: 100%;
-  background-image: url(@/assets/img/cnsbackground.jpg);
+  background-image: url(@/assets/img/cns-background.jpg);
   background-attachment: fixed;
   background-size: cover;
 }

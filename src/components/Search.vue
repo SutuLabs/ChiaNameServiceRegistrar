@@ -12,7 +12,7 @@
       <div class="mt-10" v-if="!showDetail">
         <img src="@/assets/img/cns-logo.png" class="image is-96x96" style="margin: auto" />
         <p class="has-text-centered is-size-3 mt-5 has-text-white has-text-weight-bold">Chia Name Service</p>
-        <p class="has-text-centered mb-5 pb-4">
+        <p class="has-text-centered mb-5 pb-4 has-text-white">
           (Test Only)<i
             class="mdi mdi-help-circle"
             title="Testing is expected to end in December 2022. Please note that all names registered during the test period will be invalid. Welcome to re-register your name after the official launch of CNS."
@@ -344,7 +344,6 @@ export default class Search extends Vue {
 }
 </script>
 <style scoped lang="scss">
-
 .logo {
   max-height: 10rem;
 }
