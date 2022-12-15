@@ -18,6 +18,8 @@ export default class App extends Vue {}
 <style>
 html {
   height: 100%;
-  background-image: linear-gradient(#83f4a0, #68c781, #3fe8ad, #6db4d1);
+  background-image: url(@/assets/img/cnsbackground.jpg);
+  background-attachment: fixed;
+  background-size: cover;
 }
 </style>
