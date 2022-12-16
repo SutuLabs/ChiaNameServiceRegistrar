@@ -77,6 +77,9 @@
                   <span class="has-text-grey is-size-7"> Failed </span>
                 </div>
               </div>
+              <div class="dropdown-item" v-if="price.reason && name.length >= 6">
+                <span class="has-text-danger"> {{ price.reason }} </span>
+              </div>
             </div>
           </div>
           <span class="icon is-left">
@@ -153,6 +156,7 @@
                   <span class="is-size-5 has-text-weight-bold">{{ name }}.xch </span
                   ><span class="has-text-danger"><i class="mdi mdi-close-circle mdi-18px"></i>UNAVAILABLE</span>
                 </p>
+                <span class="has-text-danger"> {{ price.reason }} </span>
               </div>
             </div>
           </div>

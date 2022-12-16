@@ -12,6 +12,7 @@ export interface PriceResponse {
 export interface Price {
     price: number;
     royaltyPercentage: number;
+    reason?: string
 }
 
 export interface RegisterResponse {
@@ -38,7 +39,7 @@ export async function getPrice(name: string): Promise<Price> {
         });
         const qresp = (await resp.json()) as PriceResponse;
         if (qresp.success) return { price: qresp.price ?? -1, royaltyPercentage: qresp.royaltyPercentage ?? -1 };
-        return { price: -1, royaltyPercentage: -1 };
+        return { price: -1, royaltyPercentage: -1, reason: qresp.reason };
     } catch (error) {
         console.warn(error);
         return { price: -1, royaltyPercentage: -1 };
