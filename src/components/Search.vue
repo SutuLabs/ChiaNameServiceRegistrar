@@ -30,58 +30,6 @@
             @input.enter="reset()"
             @keyup.enter="search()"
           />
-          <p v-if="errorMsg" class="has-text-danger">{{ errorMsg }}</p>
-          <div id="dropdown-menu" role="menu" v-if="!showDetail && resolveAns && !isResolving">
-            <div class="dropdown-content">
-              <div class="dropdown-item">
-                <div class="is-flex is-align-items-center" v-if="name.length < 6">
-                  <i class="mdi has-text-warning mdi-dots-horizontal-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all"
-                    >{{ name.toLowerCase() }}.xch
-                    <i
-                      class="mdi mdi-help-circle"
-                      title="During the trial operation period of CNS, only names with 6 or more characters can be registered for the time being. In the future, the registration of all names will be gradually opened. Stay tuned!"
-                    ></i
-                  ></span>
-                  <span class="has-text-grey is-size-7"> Not Open Yet </span>
-                </div>
-                <div
-                  class="is-flex is-align-items-center is-clickable"
-                  v-else-if="resolveAns?.status == 'Found'"
-                  @click="showResult()"
-                >
-                  <i class="mdi has-text-info mdi-arrow-right-bold-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ name.toLowerCase() }}.xch</span>
-                  <span class="has-text-grey is-size-7"> Registered </span>
-                </div>
-                <div
-                  class="is-flex is-align-items-center is-clickable"
-                  v-else-if="resolveAns?.status == 'NotFound' && price.price > 0"
-                  @click="showResult()"
-                >
-                  <i class="mdi has-text-success mdi-check-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ name.toLowerCase() }}.xch</span>
-                  <span class="has-text-grey is-size-7"> Available </span>
-                </div>
-                <div
-                  class="is-flex is-align-items-center is-clickable"
-                  v-else-if="resolveAns?.status == 'NotFound' && price.price < 0"
-                >
-                  <i class="mdi has-text-danger mdi-close-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ name.toLowerCase() }}.xch</span>
-                  <span class="has-text-grey is-size-7"> Unavailable </span>
-                </div>
-                <div class="is-flex is-align-items-center is-clickable" v-else>
-                  <i class="mdi has-text-danger mdi-close-circle mdi-18px"></i>
-                  <span class="is-size-6 ml-2 is-flex-grow-2 break-all">{{ name.toLowerCase() }}.xch</span>
-                  <span class="has-text-grey is-size-7"> Failed </span>
-                </div>
-              </div>
-              <div class="dropdown-item" v-if="price.reason && name.length >= 6">
-                <span class="has-text-danger"> {{ price.reason }} </span>
-              </div>
-            </div>
-          </div>
           <span class="icon is-left">
             <i class="mdi mdi-magnify mdi-18px"></i>
           </span>
@@ -102,18 +50,30 @@
               <div class="content">
                 <p>
                   <span class="is-size-5 has-text-weight-bold">{{ name }}.xch </span
-                  ><span class="has-text-warning"><i class="mdi mdi-dots-horizontal-circle mdi-18px"></i>NOT OPEN YET</span>
+                  ><span class="has-text-warning"><i class="mdi mdi-dots-horizontal-circle mdi-18px"></i>Not Open Yet</span>
                 </p>
                 During the trial operation period of CNS, only names with 6 or more characters can be registered for the time
                 being. In the future, the registration of all names will be gradually opened. Stay tuned!
               </div>
             </div>
           </div>
-          <div class="box mt-4" v-else-if="resolveAns?.status == 'Found'">
-            <a class="has-text-link is-size-5 break-all" :href="`https://${name}.xch.cool`" target="_blank"
-              >{{ name.toLowerCase() }}.xch<i class="mdi mdi-open-in-new"></i
-            ></a>
-            <p class="has-text-white break-all">{{ ownerAddress }}</p>
+          <div class="card mt-4" v-else-if="resolveAns?.status == 'Found'">
+            <header class="card-header">
+              <p class="card-header-title break-all">
+                <a class="has-text-link is-size-5 break-all" :href="`https://${name}.xch.cool`" target="_blank"
+                  >{{ name }}.xch<i class="mdi mdi-open-in-new"></i
+                ></a>
+              </p>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                <p>
+                  <span class="is-size-5 has-text-weight-bold">{{ name }}.xch </span
+                  ><span class="has-text-info"><i class="mdi mdi-arrow-right-bold-circle mdi-18px"></i>Registered</span>
+                </p>
+                This name has been registered. Go to viwe Profile Homepage.
+              </div>
+            </div>
           </div>
           <div class="card mt-4" v-else-if="resolveAns?.status == 'NotFound' && price.price > 0">
             <header class="card-header">
@@ -122,8 +82,8 @@
             <div class="card-content">
               <div class="content">
                 <p>
-                  <span class="is-size-5 has-text-weight-bold">{{ name }}.xch </span
-                  ><span class="has-text-success"><i class="mdi mdi-check-circle mdi-18px"></i>AVAILABLE</span>
+                  <span class="is-size-5 has-text-weight-bold break-all">{{ name }}.xch </span
+                  ><span class="has-text-success"><i class="mdi mdi-check-circle mdi-18px"></i>Available</span>
                 </p>
                 <p>
                   <span class="is-size-6 has-text-grey">Registration Period</span><span class="is-pulled-right"> 1 Year </span>
@@ -153,8 +113,8 @@
             <div class="card-content">
               <div class="content">
                 <p>
-                  <span class="is-size-5 has-text-weight-bold">{{ name }}.xch </span
-                  ><span class="has-text-danger"><i class="mdi mdi-close-circle mdi-18px"></i>UNAVAILABLE</span>
+                  <span class="is-size-5 has-text-weight-bold break-all">{{ name }}.xch </span
+                  ><span class="has-text-danger"><i class="mdi mdi-close-circle mdi-18px"></i>Unavailable</span>
                 </p>
                 <span class="has-text-danger"> {{ price.reason }} </span>
               </div>
@@ -269,13 +229,8 @@ export default class Search extends Vue {
       );
       if (this.resolveAns.status == "NotFound") await this.getPrice();
     }
-
-    this.isResolving = false;
-  }
-
-  showResult(): void {
     this.showDetail = true;
-    return;
+    this.isResolving = false;
   }
 
   async getPrice(): Promise<void> {
