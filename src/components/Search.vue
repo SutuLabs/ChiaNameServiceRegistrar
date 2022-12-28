@@ -44,12 +44,12 @@
           <span class="is-size-5 has-text-white mb-4">Result</span>
           <div class="card mt-4" v-if="name.length < 6">
             <header class="card-header">
-              <p class="card-header-title break-all">{{ name }}.xch</p>
+              <p class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
             </header>
             <div class="card-content" v-if="name.length < 6">
               <div class="content">
                 <p>
-                  <span class="is-size-5 has-text-weight-bold">{{ name }}.xch </span
+                  <span class="is-size-5 has-text-weight-bold">{{ name.toLocaleLowerCase() }}.xch </span
                   ><span class="has-text-warning"><i class="mdi mdi-dots-horizontal-circle mdi-18px"></i>Not Open Yet</span>
                 </p>
                 During the trial operation period of CNS, only names with 6 or more characters can be registered for the time
@@ -60,7 +60,10 @@
           <div class="card mt-4" v-else-if="resolveAns?.status == 'Found'">
             <header class="card-header">
               <p class="card-header-title break-all">
-                <a class="has-text-link is-size-5 break-all" :href="`https://${name}.xch.cool`" target="_blank"
+                <a
+                  class="has-text-link is-size-5 break-all"
+                  :href="`https://${name.toLocaleLowerCase()}.xch.cool`"
+                  target="_blank"
                   >{{ name }}.xch<i class="mdi mdi-open-in-new"></i
                 ></a>
               </p>
@@ -68,7 +71,7 @@
             <div class="card-content">
               <div class="content">
                 <p>
-                  <span class="is-size-5 has-text-weight-bold">{{ name }}.xch </span
+                  <span class="is-size-5 has-text-weight-bold">{{ name.toLocaleLowerCase() }}.xch </span
                   ><span class="has-text-info"><i class="mdi mdi-arrow-right-bold-circle mdi-18px"></i>Registered</span>
                 </p>
                 This name has been registered. Go to viwe Profile Homepage.
@@ -77,12 +80,12 @@
           </div>
           <div class="card mt-4" v-else-if="resolveAns?.status == 'NotFound' && price.price > 0">
             <header class="card-header">
-              <p class="card-header-title break-all">{{ name }}.xch</p>
+              <p class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
             </header>
             <div class="card-content">
               <div class="content">
                 <p>
-                  <span class="is-size-5 has-text-weight-bold break-all">{{ name }}.xch </span
+                  <span class="is-size-5 has-text-weight-bold break-all">{{ name.toLocaleLowerCase() }}.xch </span
                   ><span class="has-text-success"><i class="mdi mdi-check-circle mdi-18px"></i>Available</span>
                 </p>
                 <p>
@@ -112,12 +115,12 @@
           </div>
           <div class="card mt-4" v-else>
             <header class="card-header">
-              <p class="card-header-title break-all">{{ name }}.xch</p>
+              <p class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
             </header>
             <div class="card-content">
               <div class="content">
                 <p>
-                  <span class="is-size-5 has-text-weight-bold break-all">{{ name }}.xch </span
+                  <span class="is-size-5 has-text-weight-bold break-all">{{ name.toLocaleLowerCase() }}.xch </span
                   ><span class="has-text-danger"><i class="mdi mdi-close-circle mdi-18px"></i>Unavailable</span>
                 </p>
                 <span class="has-text-danger"> {{ price.reason }} </span>
@@ -131,14 +134,14 @@
       <div class="modal-background"></div>
       <div class="modal-card" v-if="!offer">
         <header class="modal-card-head">
-          <p class="modal-card-title">Register {{ name }}.xch</p>
+          <p class="modal-card-title">Register {{ name.toLocaleLowerCase() }}.xch</p>
           <button class="delete" aria-label="close" @click="showModal = false"></button>
         </header>
         <section class="modal-card-body">
           <div class="field">
             <label class="label">Name</label>
             <div class="control">
-              <input class="input" type="text" disabled :value="name + '.xch'" />
+              <input class="input" type="text" disabled :value="name.toLocaleLowerCase() + '.xch'" />
             </div>
           </div>
           <div class="field">
@@ -181,7 +184,7 @@
                 Take Offer <i class="mdi mdi-help-circle" title="You can take this offer in Chia official wallet or Pawket."></i>
               </p>
               <p>
-                <a class="mr-4" :href="offerUri" :download="name + '.xch.offer'" @click.stop="">Download</a
+                <a class="mr-4" :href="offerUri" :download="name.toLocaleLowerCase() + '.xch.offer'" @click.stop="">Download</a
                 ><a @click.stop="copy(offer)">Copy</a>
               </p>
             </div>
