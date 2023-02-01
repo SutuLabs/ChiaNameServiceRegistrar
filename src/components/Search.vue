@@ -276,7 +276,7 @@ export default class Search extends Vue {
 
   openPawket(): void {
     const baseUrl = "https://kitten.pawket.app/";
-    const pawket = window.open(`${baseUrl}#/connect`, "Pawket", "width=390,height=844");
+    const pawket = window.open(`${baseUrl}#/connect`, "Pawket" + Date.now(), "width=390,height=844");
     setTimeout(
       () =>
         pawket?.postMessage(
