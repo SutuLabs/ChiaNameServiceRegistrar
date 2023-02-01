@@ -83,7 +83,7 @@
                   <span class="is-size-5 has-text-weight-bold">{{ name.toLocaleLowerCase() }}.xch </span
                   ><span class="has-text-info"><i class="mdi mdi-arrow-right-bold-circle mdi-18px"></i>Registered</span>
                 </p>
-                This name has been registered. Go to viwe Profile Homepage.
+                This name has been registered. Go to view Profile Homepage.
               </div>
             </div>
           </div>
