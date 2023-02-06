@@ -1,4 +1,4 @@
-const baseUrl = "https://dev-namesite.api.pawket.app/api/"
+const baseUrl = "https://cns.api.pawket.app/api/"
 
 export interface PriceResponse {
     name: string;
