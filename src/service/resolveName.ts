@@ -16,7 +16,7 @@ export interface ResolveFailureAnswer {
     status: "NotFound" | "Failure";
 }
 
-const baseUrl = "https://dev.api.pawket.app/"
+const baseUrl = "https://walletapi.chiabee.net/"
 
 export async function resolveName(name: string): Promise<StandardResolveAnswer | ResolveFailureAnswer> {
     try {
