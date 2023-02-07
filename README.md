@@ -1,4 +1,7 @@
-# chia-name-service
+# Chia Name Service Registrar
+
+Change the royalty address to yours [HERE](src/service/cns-register.ts#L1).
+Then you can start earning your agency commission.
 
 ## Project setup
 ```
@@ -15,10 +18,6 @@ yarn serve
 yarn build
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
+## License
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Apache 2.0

@@ -1,3 +1,4 @@
+const royaltyAddress = ""
 const baseUrl = "https://cns.api.pawket.app/api/"
 
 export interface PriceResponse {
@@ -27,8 +28,6 @@ export interface RegisterResponse {
     reason?: string,
     code?: string,
 }
-
-const royaltyAddress = ""
 
 export async function getPrice(name: string): Promise<Price> {
     try {
