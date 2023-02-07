@@ -7,6 +7,11 @@
           <span class="is-size-5 has-text-weight-bold has-text-white">CNS</span>
         </div>
       </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <a class="has-text-white is-size-5" href="https://sutulabs.github.io/CNSWhitepaper/Faq.html" target="_blank">FAQ </a>
+        </div>
+      </div>
     </nav>
     <div>
       <div class="mt-10" v-if="!showDetail">
@@ -83,7 +88,10 @@
                   <span class="is-size-5 has-text-weight-bold">{{ name.toLocaleLowerCase() }}.xch </span
                   ><span class="has-text-info"><i class="mdi mdi-arrow-right-bold-circle mdi-18px"></i>Registered</span>
                 </p>
-                This name has been registered. Go to view Profile Homepage.
+                This name has been registered. Go to view
+                <a class="has-text-link" :href="`https://${name.toLocaleLowerCase()}.xch.cool`" target="_blank"
+                  >Profile Homepage<i class="mdi mdi-open-in-new"></i></a
+                >.
               </div>
             </div>
           </div>
@@ -163,13 +171,18 @@
         </section>
         <footer class="modal-card-foot is-block">
           <button class="button" @click="showModal = false">Cancel</button>
-          <button
-            :class="{ button: true, 'is-cns': true, 'is-pulled-right': true, 'is-loading': registering }"
-            @keyup.enter="register()"
-            @click="register()"
-          >
-            Register
-          </button>
+          <div class="is-pulled-right">
+            <span v-if="registering" class="has-text-color-cns is-size-7 has-text-right">
+              Please wait a moment while the offer is being generated.
+            </span>
+            <button
+              :class="{ button: true, 'is-cns': true, 'is-loading': registering }"
+              @keyup.enter="register()"
+              @click="register()"
+            >
+              Register
+            </button>
+          </div>
         </footer>
       </div>
       <div class="modal-card" v-else>
@@ -234,7 +247,7 @@ export default class Search extends Vue {
   public registering = false;
 
   get isQaSite(): boolean {
-    return location.hostname == "cnssite.qa.supernova.uchaindb.com";
+    return location.hostname == "cnssite.qa.supernova.uchaindb.com" || location.hostname == "localhost";
   }
 
   async search(): Promise<void> {
