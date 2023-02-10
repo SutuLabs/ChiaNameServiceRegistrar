@@ -140,7 +140,11 @@
                   <span class="is-size-5 has-text-weight-bold break-all">{{ name.toLocaleLowerCase() }}.xch </span
                   ><span class="has-text-danger"><i class="mdi mdi-close-circle mdi-18px"></i>Unavailable</span>
                 </p>
-                <span class="has-text-danger"> {{ price.reason }} </span>
+                <span class="has-text-danger" v-if="price.reason?.match('not available')"
+                  >This name is reserved. If you can prove that you are the owner of the name/trademark/brand, please contact us
+                  via Twitter/Discord.</span
+                >
+                <span class="has-text-danger" v-else>{{ price.reason }}</span>
               </div>
             </div>
           </div>
