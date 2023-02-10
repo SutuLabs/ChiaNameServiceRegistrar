@@ -205,10 +205,10 @@
         <section class="modal-card-body">
           <div class="columns is-align-items-start m-3">
             <div class="column is-5 box has-text-centered mr-6 ml-3">
-              <i class="mdi mdi-arrow-collapse-down mdi-48px"></i>
-              <p class="is-size-5">
-                Take Offer <i class="mdi mdi-help-circle" title="You can take this offer in Chia official wallet or Pawket."></i>
-              </p>
+              <a class="mr-4 has-text-dark" :href="offerUri" :download="name.toLocaleLowerCase() + '.xch.offer'" @click.stop=""
+                ><i class="mdi mdi-arrow-collapse-down mdi-48px"></i
+              ></a>
+              <p class="is-size-5">Take Offer</p>
               <p>
                 <a class="mr-4" :href="offerUri" :download="name.toLocaleLowerCase() + '.xch.offer'" @click.stop="">Download</a
                 ><a @click.stop="copy(offer)">Copy</a>
