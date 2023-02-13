@@ -130,6 +130,19 @@
               <div class="has-text-right"><button class="button is-cns" @click="showModal = true">Register</button></div>
             </div>
           </div>
+          <div class="card mt-4" v-else-if="resolveAns.status == 'Failure'">
+            <header class="card-header">
+              <p class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                <p>
+                  <span class="is-size-5 has-text-weight-bold break-all">{{ name.toLocaleLowerCase() }}.xch </span
+                  ><span class="has-text-danger"><i class="mdi mdi-alert-circle mdi-18px"></i>Network issue</span>
+                </p>
+              </div>
+            </div>
+          </div>
           <div class="card mt-4" v-else>
             <header class="card-header">
               <p class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
