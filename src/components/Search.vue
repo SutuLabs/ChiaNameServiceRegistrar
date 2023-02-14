@@ -18,7 +18,7 @@
         <img src="@/assets/img/cns-logo.png" class="image is-96x96" style="margin: auto" />
         <p class="has-text-centered is-size-3 my-5 has-text-white has-text-weight-bold">Chia Name Service</p>
       </div>
-      <div class="is-flex is-justify-content-center" v-if="isQaSite">
+      <div class="is-flex is-justify-content-center">
         <div class="control has-icons-left search-bar">
           <input
             class="input"
@@ -37,21 +37,6 @@
           <a class="button is-cns is-loading" v-if="isResolving">Loading</a>
           <a class="button is-cns" v-else @click="search()">Search</a>
         </p>
-      </div>
-      <div v-if="!isQaSite">
-        <div class="is-flex is-justify-content-center">
-          <div class="control has-icons-left search-bar">
-            <input class="input" placeholder="Search for a Chia Domain Name" disabled />
-            <span class="icon is-left">
-              <i class="mdi mdi-magnify mdi-18px"></i>
-            </span>
-          </div>
-          <p class="control">
-            <a class="button is-cns" disabled>Search</a>
-          </p>
-        </div>
-        <p class="has-text-centered is-size-2 mt-5 has-text-white">Coming Soon...</p>
-        <p class="has-text-centered is-size-6 mt-2 has-text-white">To be officially launched in February 2023.</p>
       </div>
       <div v-if="showDetail && !isResolving" class="is-flex is-justify-content-center mt-4 mx-4">
         <div class="column is-5" v-if="resolveAns">
@@ -262,10 +247,6 @@ export default class Search extends Vue {
   public registerErrMsg = "";
   public offer = "";
   public registering = false;
-
-  get isQaSite(): boolean {
-    return location.hostname == "cnssite.qa.supernova.uchaindb.com" || location.hostname == "localhost";
-  }
 
   async search(): Promise<void> {
     this.isResolving = true;
