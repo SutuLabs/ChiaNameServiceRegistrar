@@ -222,7 +222,8 @@
         </section>
       </div>
     </div>
-    <footer class="is-fixed-bottom py-4 px-4 has-text-centered">
+    <Ranking />
+    <footer class="py-4 px-4 has-text-centered">
       <a href="https://discord.com/invite/uP68PFVWSN" class="has-text-white" target="_blank">Discord </a>
       <a href=" https://twitter.com/ChiaNameService" target="_blank" class="has-text-white">| Twitter</a>
       <p class="has-text-white">Trademark is licensed</p>
@@ -233,9 +234,16 @@
 <script lang="ts">
 import { getPrice, Price, register } from "@/service/cns-register";
 import { ResolveFailureAnswer, resolveName, StandardResolveAnswer } from "@/service/resolveName";
+import { copy } from "@/service/utility";
 import { bech32m } from "@scure/base";
-import { Vue } from "vue-class-component";
+import { Options, Vue } from "vue-class-component";
+import Ranking from "./Ranking.vue";
 
+@Options({
+  components: {
+    Ranking,
+  },
+})
 export default class Search extends Vue {
   public name = "";
   public address = "";
@@ -322,25 +330,7 @@ export default class Search extends Vue {
   }
 
   copy(copyText: string): void {
-    const textArea = document.createElement("textarea");
-    textArea.value = copyText;
-
-    textArea.style.top = "0";
-    textArea.style.left = "0";
-    textArea.style.position = "fixed";
-
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-
-    try {
-      document.execCommand("copy");
-    } catch (err) {
-      console.warn("failed to copy: ", err);
-    }
-
-    document.body.removeChild(textArea);
-    this.$notify("Copied");
+    copy(copyText);
   }
 
   get offerUri(): string {
@@ -382,12 +372,6 @@ export default class Search extends Vue {
 
 .break-all {
   word-break: break-all;
-}
-
-.is-fixed-bottom {
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
 }
 
 .navbar {
