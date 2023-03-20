@@ -48,7 +48,9 @@ export async function getWealthiest(): Promise<WealthyUser[]> {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({})
+            body: JSON.stringify({
+                count: 100
+            })
         });
         const qresp = (await resp.json()) as WealthiestResponse;
         return qresp.names.sort((a, b) => Number(b.balance - a.balance));

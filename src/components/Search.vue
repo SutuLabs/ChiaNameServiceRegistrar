@@ -223,7 +223,7 @@
       </div>
     </div>
     <Ranking />
-    <footer class="py-4 px-4 has-text-centered">
+    <footer class="mt-6 pb-4 px-4 has-text-centered">
       <a href="https://discord.com/invite/uP68PFVWSN" class="has-text-white" target="_blank">Discord </a>
       <a href=" https://twitter.com/ChiaNameService" target="_blank" class="has-text-white">| Twitter</a>
       <p class="has-text-white">Trademark is licensed</p>
