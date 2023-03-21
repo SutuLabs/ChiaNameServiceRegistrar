@@ -10,7 +10,7 @@
             </tr>
             <tr>
               <th>Rank</th>
-              <th>Name</th>
+              <th>Holder</th>
               <th class="is-hidden-mobile">Binding Address</th>
               <th>Balance</th>
             </tr>
