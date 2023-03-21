@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="is-size-3 has-text-centered has-text-white mt-6 pt-6 mb-4 pb-4 has-text-weight-semibold">Ranking List</div>
+    <div class="is-size-3 has-text-centered has-text-white mb-4 pb-4 has-text-weight-semibold">Ranking List</div>
     <div class="overflow-x-auto max-w-6xl margin-auto">
       <div class="is-inline-block is-min-full overflow-hidden">
         <table class="table is-fullwidth is-hoverable is-striped">
           <thead>
             <tr>
-              <th><p class="is-size-5">Top Holders</p></th>
+              <th><p class="is-size-5">Top Holders in the CNS Community</p></th>
               <th></th>
               <th></th>
               <th></th>
@@ -14,53 +14,55 @@
             <tr>
               <th>Rank</th>
               <th>Name</th>
+              <th class="is-hidden-mobile">Binding Address</th>
               <th>Balance</th>
-              <th>Binding Address</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(holder, index) in currentHolders" :key="index">
+            <tr
+              v-for="(holder, index) in currentHolders"
+              :key="index"
+              class="is-clickable"
+              @click="holder.showAllNames = !holder.showAllNames"
+            >
               <td>{{ 10 * (currentTopHolderPage - 1) + index + 1 }}</td>
               <td>
                 <div v-if="holder.names.split(',').length > 1">
                   <p class="mb-1" v-for="name in holder.names.split(',').slice(0, 1)" :key="name">
-                    {{ name }}
-                    <a :href="`https://${name.toLocaleLowerCase()}.cool`" target="_blank" class="has-text-dark"
-                      ><i class="mdi mdi-open-in-new"></i
-                    ></a>
+                    <a :href="`https://${name.toLocaleLowerCase()}.cool`" target="_blank" class="has-text-color-cns">
+                      {{ name }}</a
+                    >
                     <i
                       class="is-pulled-right mdi mdi-chevron-down is-clickable"
                       aria-hidden="true"
-                      @click="holder.showAllNames = !holder.showAllNames"
+                      @click.stop="holder.showAllNames = !holder.showAllNames"
                     ></i>
                   </p>
                   <div v-if="holder.showAllNames">
                     <p class="mb-1" v-for="name in holder.names.split(',').slice(1)" :key="name">
-                      {{ name }}
-                      <a :href="`https://${name.toLocaleLowerCase()}.cool`" target="_blank" class="has-text-dark"
-                        ><i class="mdi mdi-open-in-new"></i
-                      ></a>
+                      <a :href="`https://${name.toLocaleLowerCase()}.cool`" target="_blank" class="has-text-color-cns">
+                        {{ name }}</a
+                      >
                     </p>
                   </div>
                 </div>
                 <div v-else>
                   <p class="mb-1">
-                    {{ holder.names }}
-                    <a :href="`https://${holder.names.toLocaleLowerCase()}.cool`" target="_blank" class="has-text-dark"
-                      ><i class="mdi mdi-open-in-new"></i
-                    ></a>
+                    <a :href="`https://${holder.names.toLocaleLowerCase()}.cool`" target="_blank" class="has-text-color-cns">
+                      {{ holder.names }}
+                    </a>
                   </p>
                 </div>
               </td>
-              <td>{{ Number(holder.balance) / 1000000000000 }} XCH </td>
-              <td>
+              <td class="is-hidden-mobile">
                 <span :data-tooltip="getAddressFromPuzzleHash(holder.puzzle_hash)" class="mr-2">{{
                   shorten(getAddressFromPuzzleHash(holder.puzzle_hash))
                 }}</span>
-                <a href="javascript:void(0)" @click="copy(getAddressFromPuzzleHash(holder.puzzle_hash))"
+                <a href="javascript:void(0)" @click.stop="copy(getAddressFromPuzzleHash(holder.puzzle_hash))"
                   ><i class="mdi mdi-content-copy"></i
                 ></a>
               </td>
+              <td>{{ (Number(holder.balance) / 1000000000000).toFixed(2) }} XCH</td>
             </tr>
           </tbody>
           <tfoot>
@@ -71,29 +73,46 @@
                     <a
                       :class="{ 'pagination-previous': true, 'is-disabled': currentTopHolderPage == 1 }"
                       title="This is the first page"
-                      @click="
-                        () => {
-                          if (currentTopHolderPage > 1) currentTopHolderPage -= 1;
-                        }
-                      "
-                      >Previous</a
+                      @click="currentTopHolderPage = 1"
+                      >First</a
                     >
                     <a
                       :class="{ 'pagination-next': true, 'is-disabled': currentTopHolderPage == totalPage }"
-                      @click="
-                        () => {
-                          if (currentTopHolderPage < totalPage) currentTopHolderPage += 1;
-                        }
-                      "
-                      >Next page</a
+                      title="This is the first page"
+                      @click="currentTopHolderPage = totalPage"
+                      >Last</a
                     >
                     <ul class="pagination-list">
+                      <li>
+                        <a
+                          :class="{ 'pagination-link': true, 'is-disabled': currentTopHolderPage == 1 }"
+                          title="This is the first page"
+                          @click="
+                            () => {
+                              if (currentTopHolderPage > 1) currentTopHolderPage -= 1;
+                            }
+                          "
+                        >
+                          <i class="mdi mdi-chevron-double-left"></i>
+                        </a>
+                      </li>
                       <li v-for="page of totalPage" :key="page">
                         <a
-                          :class="{ 'pagination-link': true, 'has-bg-cns': currentTopHolderPage == page }"
+                          :class="{ 'pagination-link': true, 'is-cns': currentTopHolderPage == page }"
                           @click="currentTopHolderPage = page"
                           >{{ page }}</a
                         >
+                      </li>
+                      <li>
+                        <a
+                          :class="{ 'pagination-link': true, 'is-disabled': currentTopHolderPage == totalPage }"
+                          @click="
+                            () => {
+                              if (currentTopHolderPage < totalPage) currentTopHolderPage += 1;
+                            }
+                          "
+                          ><i class="mdi mdi-chevron-double-right"></i
+                        ></a>
                       </li>
                     </ul>
                   </nav>
@@ -139,7 +158,7 @@
 
 <script lang="ts">
 import { getWealthiest, RecentMinted, WealthyUser } from "@/service/ranking";
-import { copy } from "@/service/utility";
+import { copy, unprefix0x } from "@/service/utility";
 import { bech32m } from "@scure/base";
 import { Vue } from "vue-class-component";
 
@@ -175,7 +194,7 @@ export default class Ranking extends Vue {
   }
 
   getAddressFromPuzzleHash(hash: string): string {
-    return bech32m.encode("xch", bech32m.toWords(this.fromHexString(hash)));
+    return bech32m.encode("xch", bech32m.toWords(this.fromHexString(unprefix0x(hash))));
   }
 
   fromHexString(hexString: string): Uint8Array {
@@ -211,16 +230,16 @@ export default class Ranking extends Vue {
 }
 
 .max-w-6xl {
-  max-width: 72rem
+  max-width: 72rem;
 }
 
 .margin-auto {
   margin: auto;
 }
 
-.has-bg-cns {
-  background-color: #40ac5c;
-  border-color: transparent;
-  color: #fff;
+tbody {
+  font-family: roboto mono, Fira Code, Monaco, Menlo, Source Code Pro, Consolas, courier new, -apple-system, BlinkMacSystemFont,
+    Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif, Roboto,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, monospace;
 }
 </style>

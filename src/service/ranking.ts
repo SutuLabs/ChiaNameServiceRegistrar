@@ -49,7 +49,7 @@ export async function getWealthiest(): Promise<WealthyUser[]> {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                count: 100
+                count: 50
             })
         });
         const qresp = (await resp.json()) as WealthiestResponse;

@@ -18,3 +18,9 @@ export function copy(copyText: string): void {
 
     document.body.removeChild(textArea);
 }
+
+export type Hex0x = "()" | `0x${string}`;
+
+export function unprefix0x(str: Hex0x | string | undefined): string {
+    return str && str.startsWith("0x") ? str.substring(2) : (str ?? "");
+  }

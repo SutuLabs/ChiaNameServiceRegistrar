@@ -15,11 +15,21 @@ import Search from "./components/Search.vue";
 export default class App extends Vue {}
 </script>
 
-<style>
+<style lang="scss">
 html {
   height: 100%;
   background-image: url(@/assets/img/cns-background.jpg);
   background-attachment: fixed;
   background-size: cover;
+}
+
+.has-text-color-cns {
+  color: #40ac5c;
+}
+
+.is-cns {
+  background-color: #40ac5c;
+  border-color: transparent;
+  color: #fff;
 }
 </style>

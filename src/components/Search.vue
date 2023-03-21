@@ -16,7 +16,7 @@
       <div class="is-flex is-justify-content-center">
         <div class="control has-icons-left search-bar">
           <input
-            class="input"
+            class="input is-medium"
             placeholder="Search for a Chia Domain Name"
             v-model="name"
             type="search"
@@ -25,12 +25,12 @@
             @keyup.enter="search()"
           />
           <span class="icon is-left">
-            <i class="mdi mdi-magnify mdi-18px"></i>
+            <i class="mdi mdi-magnify mdi-24px"></i>
           </span>
         </div>
         <p class="control">
-          <a class="button is-cns is-loading" v-if="isResolving">Loading</a>
-          <a class="button is-cns" v-else @click="search()">Search</a>
+          <a class="button is-cns is-loading is-medium" v-if="isResolving">Loading</a>
+          <a class="button is-cns is-medium" v-else @click="search()">Search</a>
         </p>
       </div>
       <div v-if="showDetail && !isResolving" class="is-flex is-justify-content-center mt-4 mx-4">
@@ -215,7 +215,7 @@
         </section>
       </div>
     </div>
-    <Ranking v-if="!showDetail" />
+    <Ranking v-if="!showDetail" class="mt-12rem" />
     <footer class="mt-6 pb-4 px-4 has-text-centered">
       <a href="https://discord.com/invite/uP68PFVWSN" class="has-text-white" target="_blank">Discord</a>
       <a href=" https://twitter.com/ChiaNameService" target="_blank" class="has-text-white"> | Twitter</a>
@@ -350,18 +350,12 @@ export default class Search extends Vue {
   min-width: 40vw;
 }
 
-.has-text-color-cns {
-  color: #40ac5c;
-}
-
-.is-cns {
-  background-color: #40ac5c;
-  border-color: transparent;
-  color: #fff;
-}
-
 .mt-10 {
   margin-top: 8vh;
+}
+
+.mt-12rem {
+  margin-top: 12rem;
 }
 
 .break-all {
