@@ -6,10 +6,7 @@
         <table class="table is-fullwidth is-hoverable is-striped">
           <thead>
             <tr>
-              <th><p class="is-size-5">Top Holders in the CNS Community</p></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <th colspan="4"><p class="is-size-5">Top Holders in the CNS Community</p></th>
             </tr>
             <tr>
               <th>Rank</th>

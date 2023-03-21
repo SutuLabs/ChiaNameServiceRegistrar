@@ -13,7 +13,7 @@
         <img src="@/assets/img/cns-logo.png" class="image is-96x96" style="margin: auto" />
         <p class="has-text-centered is-size-3 my-5 has-text-white has-text-weight-bold">Chia Name Service</p>
       </div>
-      <div class="is-flex is-justify-content-center">
+      <div class="is-flex is-justify-content-center max-w-90">
         <div class="control has-icons-left search-bar">
           <input
             class="input is-medium"
@@ -350,6 +350,11 @@ export default class Search extends Vue {
   min-width: 40vw;
 }
 
+.max-w-90 {
+  max-width: 90vw;
+  margin: auto;
+}
+
 .mt-10 {
   margin-top: 8vh;
 }
@@ -364,5 +369,12 @@ export default class Search extends Vue {
 
 .navbar {
   background-color: transparent;
+}
+
+
+.is-cns {
+  background-color: #40ac5c;
+  border-color: transparent;
+  color: #fff;
 }
 </style>
