@@ -52,7 +52,7 @@
                   </p>
                 </div>
               </td>
-              <td>{{ BigInt(holder.balance) / 1000000000000n }} XCH</td>
+              <td>{{ Number(holder.balance) / 1000000000000 }} XCH </td>
               <td>
                 <span :data-tooltip="getAddressFromPuzzleHash(holder.puzzle_hash)" class="mr-2">{{
                   shorten(getAddressFromPuzzleHash(holder.puzzle_hash))
