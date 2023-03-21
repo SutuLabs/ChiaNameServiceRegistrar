@@ -66,20 +66,16 @@
             <tr>
               <td colspan="4">
                 <div class="has-background-white">
-                  <nav class="pagination is-centered my-2" role="navigation" aria-label="pagination">
-                    <a
-                      :class="{ 'pagination-previous': true, 'is-disabled': currentTopHolderPage == 1 }"
-                      title="This is the first page"
-                      @click="currentTopHolderPage = 1"
-                      >First</a
-                    >
-                    <a
-                      :class="{ 'pagination-next': true, 'is-disabled': currentTopHolderPage == totalPage }"
-                      title="This is the first page"
-                      @click="currentTopHolderPage = totalPage"
-                      >Last</a
-                    >
-                    <ul class="pagination-list">
+                  <nav class="pagination is-right my-2" role="navigation" aria-label="pagination">
+                    <ul class="pagination-list px-0">
+                      <li>
+                        <a
+                          :class="{ 'pagination-link': true, 'is-hidden-mobile': true, 'is-disabled': currentTopHolderPage == 1 }"
+                          title="This is the first page"
+                          @click="currentTopHolderPage = 1"
+                          >First</a
+                        >
+                      </li>
                       <li>
                         <a
                           :class="{ 'pagination-link': true, 'is-disabled': currentTopHolderPage == 1 }"
@@ -110,6 +106,18 @@
                           "
                           ><i class="mdi mdi-chevron-double-right"></i
                         ></a>
+                      </li>
+                      <li>
+                        <a
+                          :class="{
+                            'pagination-next': true,
+                            'is-hidden-mobile': true,
+                            'is-disabled': currentTopHolderPage == totalPage,
+                          }"
+                          title="This is the first page"
+                          @click="currentTopHolderPage = totalPage"
+                          >Last</a
+                        >
                       </li>
                     </ul>
                   </nav>
