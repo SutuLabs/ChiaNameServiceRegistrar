@@ -7,13 +7,6 @@
           <span class="is-size-5 has-text-weight-bold has-text-white">CNS</span>
         </div>
       </div>
-      <div class="navbar-menu">
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <a class="has-text-white is-size-5" href="https://sutulabs.github.io/CNSWhitepaper/Faq.html" target="_blank">FAQ </a>
-          </div>
-        </div>
-      </div>
     </nav>
     <div>
       <div class="mt-10" v-if="!showDetail">
@@ -222,10 +215,11 @@
         </section>
       </div>
     </div>
-    <Ranking />
+    <Ranking v-if="!showDetail" />
     <footer class="mt-6 pb-4 px-4 has-text-centered">
-      <a href="https://discord.com/invite/uP68PFVWSN" class="has-text-white" target="_blank">Discord </a>
-      <a href=" https://twitter.com/ChiaNameService" target="_blank" class="has-text-white">| Twitter</a>
+      <a href="https://discord.com/invite/uP68PFVWSN" class="has-text-white" target="_blank">Discord</a>
+      <a href=" https://twitter.com/ChiaNameService" target="_blank" class="has-text-white"> | Twitter</a>
+      <a target="_blank" class="has-text-white" href="https://sutulabs.github.io/CNSWhitepaper/Faq.html"> | FAQ </a>
       <p class="has-text-white">Trademark is licensed</p>
     </footer>
   </div>

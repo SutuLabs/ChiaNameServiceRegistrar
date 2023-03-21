@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="is-size-3 has-text-centered has-text-white mt-6 pt-6 mb-4 pb-4 has-text-weight-semibold">Ranking List</div>
-    <div class="columns is-multiline">
-      <div class="column is-8 is-offset-2">
+    <div class="overflow-x-auto max-w-6xl margin-auto">
+      <div class="is-inline-block is-min-full overflow-hidden">
         <table class="table is-fullwidth is-hoverable is-striped">
           <thead>
             <tr>
@@ -28,7 +28,11 @@
                     <a :href="`https://${name.toLocaleLowerCase()}.cool`" target="_blank" class="has-text-dark"
                       ><i class="mdi mdi-open-in-new"></i
                     ></a>
-                    <i class="is-pulled-right mdi mdi-chevron-down is-clickable" aria-hidden="true" @click="holder.showAllNames = !holder.showAllNames"></i>
+                    <i
+                      class="is-pulled-right mdi mdi-chevron-down is-clickable"
+                      aria-hidden="true"
+                      @click="holder.showAllNames = !holder.showAllNames"
+                    ></i>
                   </p>
                   <div v-if="holder.showAllNames">
                     <p class="mb-1" v-for="name in holder.names.split(',').slice(1)" :key="name">
@@ -86,7 +90,7 @@
                     <ul class="pagination-list">
                       <li v-for="page of totalPage" :key="page">
                         <a
-                          :class="{ 'pagination-link': true, 'is-current': currentTopHolderPage == page }"
+                          :class="{ 'pagination-link': true, 'has-bg-cns': currentTopHolderPage == page }"
                           @click="currentTopHolderPage = page"
                           >{{ page }}</a
                         >
@@ -193,4 +197,30 @@ export default class Ranking extends Vue {
   }
 }
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.is-min-full {
+  min-width: 100%;
+}
+
+.max-w-6xl {
+  max-width: 72rem
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.has-bg-cns {
+  background-color: #40ac5c;
+  border-color: transparent;
+  color: #fff;
+}
+</style>
