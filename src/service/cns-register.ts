@@ -37,7 +37,7 @@ export async function getPrice(name: string): Promise<Price> {
   try {
     const resp = await fetch(
       baseUrl +
-        "price?" +
+        "api/price?" +
         new URLSearchParams({
           name: name,
         }),
@@ -72,7 +72,7 @@ export async function register(
   text = ""
 ): Promise<RegisterResponse | null> {
   try {
-    const resp = await fetch(baseUrl + "register", {
+    const resp = await fetch(baseUrl + "api/register", {
       method: "POST",
       headers: {
         Accept: "application/json",
