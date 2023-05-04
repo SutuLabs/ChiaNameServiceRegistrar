@@ -11,7 +11,11 @@
     <div>
       <div class="mt-10" v-if="!showDetail">
         <img src="@/assets/img/cns-logo.png" class="image is-96x96" style="margin: auto" />
-        <p class="has-text-centered is-size-3 my-5 has-text-white has-text-weight-bold">Chia Name Service</p>
+        <p class="has-text-centered is-size-3 my-5 has-text-white has-text-weight-bold">Chia Name Service
+          <span class="mb-3 is-size-7 has-text-weight-normal">
+            {{ NetworkHint }}
+          </span>
+        </p>
       </div>
       <div class="is-flex is-justify-content-center max-w-90">
         <div class="control has-icons-left search-bar">
@@ -190,9 +194,9 @@
             aria-label="close"
             @click="
               showModal = false;
-              address = '';
-              offer = '';
-            "
+            address = '';
+            offer = '';
+                        "
           ></button>
         </header>
         <section class="modal-card-body">
@@ -252,6 +256,10 @@ export default class Search extends Vue {
   public registerErrMsg = "";
   public offer = "";
   public registering = false;
+
+  get NetworkHint(): string {
+    return window.location.host == process.env.VUE_APP_MAINNET_HOST ? "" : "testnet";
+  }
 
   async search(): Promise<void> {
     this.isResolving = true;
