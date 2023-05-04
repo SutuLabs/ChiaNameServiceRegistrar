@@ -41,7 +41,7 @@ stages:
           - task: PublishPipelineArtifact@1
             inputs:
               ArtifactName: '$(webArtifactName)'
-              targetPath: '$(Pipeline.Workspace)'
+              targetPath: '$(Build.SourcesDirectory)/dist'
 
   - stage: qa
     displayName: qa
@@ -62,7 +62,7 @@ stages:
                   inputs:
                     credentialsOption: "serviceEndpoint"
                     serverEndpoint: "cns_site_qa_ftp"
-                    rootDirectory: "$(Pipeline.Workspace)/$(webArtifactName)/s/dist"
+                    rootDirectory: "$(Pipeline.Workspace)/$(webArtifactName)"
                     filePatterns: "**"
                     remoteDirectory: "/"
                     clean: false
