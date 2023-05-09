@@ -196,7 +196,7 @@
               showModal = false;
             address = '';
             offer = '';
-                        "
+                                    "
           ></button>
         </header>
         <section class="modal-card-body">
@@ -236,6 +236,7 @@ import { copy } from "@/service/utility";
 import { bech32m } from "@scure/base";
 import { Options, Vue } from "vue-class-component";
 import Ranking from "./Ranking.vue";
+import { Pawket } from 'pawket-js-sdk';
 
 @Options({
   components: {
@@ -298,21 +299,15 @@ export default class Search extends Vue {
     this.registering = false;
   }
 
-  openPawket(): void {
+  async openPawket(): Promise<void> {
     const baseUrl = "https://pawket.app/";
-    const pawket = window.open(`${baseUrl}#/connect`, "Pawket" + Date.now(), "width=390,height=844");
-    setTimeout(
-      () =>
-        pawket?.postMessage(
-          JSON.stringify({
-            app: "take-offer",
-            data: this.offer,
-            network: "ccd5bb71183532bff220ba46c268991a3ff07eb358e8255a65c30a2dce0e5fbb",
-          }),
-          baseUrl
-        ),
-      2000
-    );
+    const client = new Pawket({ baseUrl });
+    try {
+      const msg = await client.takeOffer(this.offer);
+      console.log(msg);
+    } catch (error) {
+      console.warn(error);
+    }
   }
 
   reset(): void {
