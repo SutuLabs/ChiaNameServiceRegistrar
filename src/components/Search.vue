@@ -114,7 +114,7 @@
               <div class="has-text-right"><button class="button is-cns" @click="showModal = true">Register</button></div>
             </div>
           </div>
-          <div class="card mt-4" v-else-if="resolveAns.status == 'Failure'">
+          <div class="card mt-4" v-else-if="resolveAns.status == 'Failure' || !price.name">
             <header class="card-header">
               <p class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
             </header>
@@ -253,7 +253,7 @@ export default class Search extends Vue {
   public errorMsg = "";
   public showModal = false;
   public period = 1;
-  public price: Price = { price: -1, annualFee: -1, royaltyPercentage: -1, registrationFee: -1 };
+  public price: Price = { name: "", price: -1, annualFee: -1, royaltyPercentage: -1, registrationFee: -1 };
   public registerErrMsg = "";
   public offer = "";
   public registering = false;
@@ -312,7 +312,7 @@ export default class Search extends Vue {
 
   reset(): void {
     this.resolveAns = null;
-    this.price = { price: -1, annualFee: -1, royaltyPercentage: -1, registrationFee: -1 };
+    this.price = { name: "", price: -1, annualFee: -1, royaltyPercentage: -1, registrationFee: -1 };
     this.errorMsg = "";
   }
 
