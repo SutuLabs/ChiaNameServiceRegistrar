@@ -11,7 +11,8 @@
     <div>
       <div class="mt-10" v-if="!showDetail">
         <img src="@/assets/img/cns-logo.png" class="image is-96x96" style="margin: auto" />
-        <p class="has-text-centered is-size-3 my-5 has-text-white has-text-weight-bold">Chia Name Service
+        <p class="has-text-centered is-size-3 my-5 has-text-white has-text-weight-bold">
+          Chia Name Service
           <span class="mb-3 is-size-7 has-text-weight-normal">
             {{ NetworkHint }}
           </span>
@@ -194,9 +195,9 @@
             aria-label="close"
             @click="
               showModal = false;
-            address = '';
-            offer = '';
-                                    "
+              address = '';
+              offer = '';
+            "
           ></button>
         </header>
         <section class="modal-card-body">
@@ -236,7 +237,7 @@ import { copy } from "@/service/utility";
 import { bech32m } from "@scure/base";
 import { Options, Vue } from "vue-class-component";
 import Ranking from "./Ranking.vue";
-import { Pawket } from 'pawket-js-sdk';
+import { Pawket } from "pawket-js-sdk";
 
 @Options({
   components: {
@@ -373,7 +374,6 @@ export default class Search extends Vue {
 .navbar {
   background-color: transparent;
 }
-
 
 .is-cns {
   background-color: #40ac5c;
