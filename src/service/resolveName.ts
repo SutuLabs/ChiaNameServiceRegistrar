@@ -10,6 +10,7 @@ export interface StandardResolveAnswer {
   proof_coin_name?: string;
   proof_coin_spent_index?: number;
   nft_coin_name?: string;
+  expiry?: number;
   status: "Found";
 }
 export interface ResolveFailureAnswer {

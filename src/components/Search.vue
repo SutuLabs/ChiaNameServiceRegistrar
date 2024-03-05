@@ -41,17 +41,17 @@
       <div v-if="showDetail && !isResolving" class="is-flex is-justify-content-center mt-4 mx-4">
         <div class="column is-5" v-if="resolveAns">
           <span class="is-size-5 has-text-white mb-4">Result</span>
-          <div class="card mt-4" v-if="name.length < 6">
+          <div class="card mt-4" v-if="price.code == 'TooShort'">
             <header class="card-header">
               <p class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
             </header>
-            <div class="card-content" v-if="name.length < 6">
+            <div class="card-content">
               <div class="content">
                 <p>
                   <span class="is-size-5 has-text-weight-bold">{{ name.toLocaleLowerCase() }}.xch </span
                   ><span class="has-text-warning"><i class="mdi mdi-dots-horizontal-circle mdi-18px"></i>Not Open Yet</span>
                 </p>
-                During the trial operation period of CNS, only names with 6 or more characters can be registered for the time
+                During the current operation period of CNS, only names with 4 or more characters can be registered for the time
                 being. In the future, the registration of all names will be gradually opened. Stay tuned!
               </div>
             </div>
@@ -77,6 +77,29 @@
                 <a class="has-text-link" :href="`https://${name.toLocaleLowerCase()}.xch.cool`" target="_blank"
                   >Profile Homepage<i class="mdi mdi-open-in-new"></i></a
                 >.
+                <br />
+                <ul class="mb-6">
+                  <li v-if="resolveAns.expiry">Expiry Date: {{ new Date(resolveAns.expiry * 1000).toLocaleDateString() }}</li>
+                  <li v-if="resolveAns.expiry">Status: {{ getStatus(resolveAns.expiry) }}</li>
+                </ul>
+                <div class="field is-horizontal">
+                  <div class="field-body">
+                    <div class="field has-addons">
+                      <p class="control is-expanded has-icons-left">
+                        <input class="input" type="number" min="1" max="99" v-model="renewYear" />
+                        <span class="icon is-small is-left">
+                          <i class="mdi mdi-calendar"></i>
+                        </span>
+                      </p>
+                      <div class="control">
+                        <a class="button is-static"> year(s) </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control ml-1">
+                    <button class="button is-link" @click="renew()">Renew</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -115,7 +138,7 @@
               <div class="has-text-right"><button class="button is-cns" @click="showModal = true">Register</button></div>
             </div>
           </div>
-          <div class="card mt-4" v-else-if="resolveAns.status == 'Failure' || !price.name">
+          <div class="card mt-4" v-else-if="resolveAns.status == 'Failure'">
             <header class="card-header">
               <p class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
             </header>
@@ -258,6 +281,7 @@ export default class Search extends Vue {
   public registerErrMsg = "";
   public offer = "";
   public registering = false;
+  public renewYear = 1;
 
   get NetworkHint(): string {
     return window.location.host == process.env.VUE_APP_MAINNET_HOST ? "" : "testnet";
@@ -342,6 +366,23 @@ export default class Search extends Vue {
     const reg = hexString.match(/.{1,2}/g);
     if (!reg) return new Uint8Array();
     return new Uint8Array(reg.map((byte) => parseInt(byte, 16)));
+  }
+
+  getStatus(expiry: number): string {
+    const expsec = expiry * 1000;
+
+    const now = new Date().getTime();
+    if (expsec > now) return "OK";
+
+    // Temporarily extend expiry to 2024-03-14
+    // UTC: Mar 14 2024 00:00:00
+    if (now < 1710374400000) return "Extended";
+    if (expsec < now + 90 * 24 * 60 * 60 * 1000) return "Grace Period";
+    return "Releasing";
+  }
+
+  renew() {
+    //
   }
 }
 </script>
