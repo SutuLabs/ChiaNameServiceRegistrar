@@ -135,7 +135,18 @@
                   >
                 </p>
               </div>
-              <div class="has-text-right"><button class="button is-cns" @click="showModal = true">Register</button></div>
+
+              <div class="has-text-right">
+                <button
+                  class="button is-cns"
+                  @click="
+                    showFill = false;
+                    showModal = true;
+                  "
+                >
+                  Register
+                </button>
+              </div>
             </div>
           </div>
           <div class="card mt-4" v-else-if="resolveAns.status == 'Failure'">
@@ -188,7 +199,10 @@
           </div>
           <div class="field">
             <label class="label">Address(Optional)</label>
-            <div class="control">
+            <button v-if="!showFill" class="button is-text" @click="showFill = true">
+              Click here to specify your bound address, unaffected by owner changes.
+            </button>
+            <div v-else class="control">
               <p class="is-size-7 has-text-grey">If not filled, the owner address will be bound by default.</p>
               <input class="input" type="text" placeholder="xch1..." v-model="address" />
             </div>
@@ -282,6 +296,7 @@ export default class Search extends Vue {
   public offer = "";
   public registering = false;
   public renewYear = 1;
+  public showFill = false;
 
   get NetworkHint(): string {
     return window.location.host == process.env.VUE_APP_MAINNET_HOST ? "" : "testnet";
