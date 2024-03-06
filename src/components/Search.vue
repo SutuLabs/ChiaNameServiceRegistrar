@@ -86,7 +86,7 @@
                   <div class="field-body">
                     <div class="field has-addons">
                       <p class="control is-expanded has-icons-left">
-                        <input class="input" type="number" min="1" max="99" v-model="renewYear" />
+                        <input class="input" type="number" min="1" max="99" v-model="regYear" />
                         <span class="icon is-small is-left">
                           <i class="mdi mdi-calendar"></i>
                         </span>
@@ -113,8 +113,23 @@
                   <span class="is-size-5 has-text-weight-bold break-all">{{ name.toLocaleLowerCase() }}.xch </span
                   ><span class="has-text-success"><i class="mdi mdi-check-circle mdi-18px"></i>Available</span>
                 </p>
-                <p>
-                  <span class="is-size-6 has-text-grey">Registration Period</span><span class="is-pulled-right"> 1 Year </span>
+                <p class="my-5">
+                  <span class="is-size-6 has-text-grey">Registration Period</span>
+                  <span class="is-pulled-right">
+                    <div class="field-body">
+                      <div class="field has-addons">
+                        <p class="control is-expanded has-icons-left">
+                          <input class="input is-small" type="number" min="1" max="99" v-model="regYear" @change="getPrice()"/>
+                          <span class="icon is-small is-left">
+                            <i class="mdi mdi-calendar"></i>
+                          </span>
+                        </p>
+                        <div class="control">
+                          <a class="button is-static is-small"> year(s) </a>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
                 </p>
                 <p>
                   <span class="is-size-6 has-text-grey">Registration Fee</span
@@ -295,7 +310,7 @@ export default class Search extends Vue {
   public registerErrMsg = "";
   public offer = "";
   public registering = false;
-  public renewYear = 1;
+  public regYear = 1;
   public showFill = false;
 
   get NetworkHint(): string {
@@ -319,7 +334,7 @@ export default class Search extends Vue {
   }
 
   async getPrice(): Promise<void> {
-    this.price = await getPrice(`${this.name}.xch`);
+    this.price = await getPrice(`${this.name}.xch`, this.regYear);
   }
 
   async register(): Promise<void> {

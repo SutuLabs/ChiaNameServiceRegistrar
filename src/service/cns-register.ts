@@ -34,13 +34,14 @@ export interface RegisterResponse {
   code?: string;
 }
 
-export async function getPrice(name: string): Promise<Price> {
+export async function getPrice(name: string, year: number): Promise<Price> {
   try {
     const resp = await fetch(
       baseUrl +
         "api/price?" +
         new URLSearchParams({
           name: name,
+          year: year.toString(),
         }),
       {
         method: "GET",
