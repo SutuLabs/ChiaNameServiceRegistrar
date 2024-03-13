@@ -41,24 +41,9 @@
       <div v-if="showDetail && !isResolving" class="is-flex is-justify-content-center mt-4 mx-4">
         <div class="column is-5" v-if="resolveAns">
           <span class="is-size-5 has-text-white mb-4">Result</span>
-          <div class="card mt-4" v-if="price.code == 'TooShort'">
+          <div class="card mt-4">
             <header class="card-header">
-              <p class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                <p>
-                  <span class="is-size-5 has-text-weight-bold">{{ name.toLocaleLowerCase() }}.xch </span
-                  ><span class="has-text-warning"><i class="mdi mdi-dots-horizontal-circle mdi-18px"></i>Not Open Yet</span>
-                </p>
-                During the current operation period of CNS, only names with 4 or more characters can be registered for the time
-                being. In the future, the registration of all names will be gradually opened. Stay tuned!
-              </div>
-            </div>
-          </div>
-          <div class="card mt-4" v-else-if="resolveAns?.status == 'Found'">
-            <header class="card-header">
-              <p class="card-header-title break-all">
+              <p v-if="resolveAns?.status == 'Found'" class="card-header-title break-all">
                 <a
                   class="has-text-link is-size-5 break-all"
                   :href="`https://${name.toLocaleLowerCase()}.xch.cool`"
@@ -66,132 +51,119 @@
                   >{{ name }}.xch<i class="mdi mdi-open-in-new"></i
                 ></a>
               </p>
+              <p v-else class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
             </header>
             <div class="card-content">
               <div class="content">
                 <p>
-                  <span class="is-size-5 has-text-weight-bold">{{ name.toLocaleLowerCase() }}.xch </span
-                  ><span class="has-text-info"><i class="mdi mdi-arrow-right-bold-circle mdi-18px"></i>Registered</span>
+                  <span class="is-size-5 has-text-weight-bold">{{ name.toLocaleLowerCase() }}.xch </span>
+                  <span v-if="price.code == 'TooShort'" class="has-text-warning"
+                    ><i class="mdi mdi-dots-horizontal-circle mdi-18px"></i>Not Open Yet</span
+                  >
+                  <span v-else-if="resolveAns?.status == 'Found'" class="has-text-info"
+                    ><i class="mdi mdi-arrow-right-bold-circle mdi-18px"></i>Registered</span
+                  >
+                  <span v-else-if="resolveAns?.status == 'NotFound' && price.price > 0" class="has-text-success"
+                    ><i class="mdi mdi-check-circle mdi-18px"></i>Available</span
+                  >
+                  <span v-else-if="resolveAns.status == 'Failure'" class="has-text-danger"
+                    ><i class="mdi mdi-alert-circle mdi-18px"></i>Network issue</span
+                  >
+                  <span v-else class="has-text-danger"><i class="mdi mdi-close-circle mdi-18px"></i>Unavailable</span>
                 </p>
-                This name has been registered. Go to view
-                <a class="has-text-link" :href="`https://${name.toLocaleLowerCase()}.xch.cool`" target="_blank"
-                  >Profile Homepage<i class="mdi mdi-open-in-new"></i></a
-                >.
-                <br />
-                <ul class="mb-6">
-                  <li v-if="resolveAns.expiry">Expiry Date: {{ new Date(resolveAns.expiry * 1000).toLocaleDateString() }}</li>
-                  <li v-if="resolveAns.expiry">Status: {{ getStatus(resolveAns.expiry) }}</li>
-                </ul>
-                <div class="field is-horizontal">
-                  <div class="field-body">
-                    <div class="field has-addons">
-                      <p class="control is-expanded has-icons-left">
-                        <input class="input" type="number" min="1" max="99" v-model="regYear" />
-                        <span class="icon is-small is-left">
-                          <i class="mdi mdi-calendar"></i>
-                        </span>
-                      </p>
-                      <div class="control">
-                        <a class="button is-static"> year(s) </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="control ml-1">
-                    <button class="button is-link" @click="renew()">Renew</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card mt-4" v-else-if="resolveAns?.status == 'NotFound' && price.price > 0">
-            <header class="card-header">
-              <p class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                <p>
-                  <span class="is-size-5 has-text-weight-bold break-all">{{ name.toLocaleLowerCase() }}.xch </span
-                  ><span class="has-text-success"><i class="mdi mdi-check-circle mdi-18px"></i>Available</span>
+
+                <p v-if="price.code == 'TooShort'">
+                  During the current operation period of CNS, only names with 4 or more characters can be registered for the time
+                  being. In the future, the registration of all names will be gradually opened. Stay tuned!
                 </p>
-                <p class="my-5">
-                  <span class="is-size-6 has-text-grey">Registration Period</span>
-                  <span class="is-pulled-right">
+
+                <template v-else-if="resolveAns?.status == 'Found'">
+                  This name has been registered. Go to view
+                  <a class="has-text-link" :href="`https://${name.toLocaleLowerCase()}.xch.cool`" target="_blank"
+                    >Profile Homepage<i class="mdi mdi-open-in-new"></i></a
+                  >.
+                  <br />
+                  <ul class="mb-6">
+                    <li v-if="resolveAns.expiry">Expiry Date: {{ new Date(resolveAns.expiry * 1000).toLocaleDateString() }}</li>
+                    <li v-if="resolveAns.expiry">Status: {{ getStatus(resolveAns.expiry) }}</li>
+                  </ul>
+                  <div v-if="!(price.price > 0)" class="field is-horizontal">
                     <div class="field-body">
                       <div class="field has-addons">
                         <p class="control is-expanded has-icons-left">
-                          <input class="input is-small" type="number" min="1" max="99" v-model="regYear" @change="getPrice()"/>
+                          <input class="input" type="number" min="1" max="99" v-model="regYear" />
                           <span class="icon is-small is-left">
                             <i class="mdi mdi-calendar"></i>
                           </span>
                         </p>
                         <div class="control">
-                          <a class="button is-static is-small"> year(s) </a>
+                          <a class="button is-static"> year(s) </a>
                         </div>
                       </div>
                     </div>
-                  </span>
-                </p>
-                <p>
-                  <span class="is-size-6 has-text-grey">Registration Fee</span
-                  ><span class="is-pulled-right">{{ price.registrationFee / 1000000000000 }} XCH</span>
-                </p>
-                <p>
-                  <span class="is-size-6 has-text-grey">Annual Fee</span
-                  ><span class="is-pulled-right">{{ price.annualFee / 1000000000000 }} XCH</span>
-                </p>
-                <p>
-                  <span class="is-size-6 has-text-grey">Royalty Percentage</span
-                  ><span class="is-pulled-right">{{ price.royaltyPercentage / 100 }} %</span>
-                </p>
-                <p>
-                  <span class="is-size-6 has-text-grey">Total</span
-                  ><span class="is-pulled-right"
-                    >{{ (price.price * (10000 + price.royaltyPercentage)) / 10000000000000000 }} XCH</span
+                    <div class="control ml-1">
+                      <button class="button is-link" @click="getPrice()">Renew</button>
+                    </div>
+                  </div>
+                </template>
+                <template v-else>
+                  <span class="has-text-danger" v-if="price.code && price.code == 'NameUnavailable'"
+                    >This name is reserved. If you can prove that you are the owner of the name/trademark/brand, please contact us
+                    via Twitter/Discord.</span
                   >
-                </p>
-              </div>
+                  <span class="has-text-danger" v-else>{{ price.reason }}</span>
+                </template>
+                <template v-if="price.price > 0">
+                  <p class="my-5">
+                    <span class="is-size-6 has-text-grey">Registration Period</span>
+                    <span class="is-pulled-right">
+                      <div class="field-body">
+                        <div class="field has-addons">
+                          <p class="control is-expanded has-icons-left">
+                            <input class="input is-small" type="number" min="1" max="99" v-model="regYear" @change="getPrice()" />
+                            <span class="icon is-small is-left">
+                              <i class="mdi mdi-calendar"></i>
+                            </span>
+                          </p>
+                          <div class="control">
+                            <a class="button is-static is-small"> year(s) </a>
+                          </div>
+                        </div>
+                      </div>
+                    </span>
+                  </p>
+                  <p>
+                    <span class="is-size-6 has-text-grey">Registration Fee</span
+                    ><span class="is-pulled-right">{{ price.registrationFee / 1000000000000 }} XCH</span>
+                  </p>
+                  <p>
+                    <span class="is-size-6 has-text-grey">Annual Fee</span
+                    ><span class="is-pulled-right">{{ price.annualFee / 1000000000000 }} XCH</span>
+                  </p>
+                  <p>
+                    <span class="is-size-6 has-text-grey">Royalty Percentage</span
+                    ><span class="is-pulled-right">{{ price.royaltyPercentage / 100 }} %</span>
+                  </p>
+                  <p>
+                    <span class="is-size-6 has-text-grey">Total</span
+                    ><span class="is-pulled-right"
+                      >{{ (price.price * (10000 + price.royaltyPercentage)) / 10000000000000000 }} XCH</span
+                    >
+                  </p>
 
-              <div class="has-text-right">
-                <button
-                  class="button is-cns"
-                  @click="
-                    showFill = false;
-                    showModal = true;
-                  "
-                >
-                  Register
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="card mt-4" v-else-if="resolveAns.status == 'Failure'">
-            <header class="card-header">
-              <p class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                <p>
-                  <span class="is-size-5 has-text-weight-bold break-all">{{ name.toLocaleLowerCase() }}.xch </span
-                  ><span class="has-text-danger"><i class="mdi mdi-alert-circle mdi-18px"></i>Network issue</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="card mt-4" v-else>
-            <header class="card-header">
-              <p class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                <p>
-                  <span class="is-size-5 has-text-weight-bold break-all">{{ name.toLocaleLowerCase() }}.xch </span
-                  ><span class="has-text-danger"><i class="mdi mdi-close-circle mdi-18px"></i>Unavailable</span>
-                </p>
-                <span class="has-text-danger" v-if="price.code && price.code == 'NameUnavailable'"
-                  >This name is reserved. If you can prove that you are the owner of the name/trademark/brand, please contact us
-                  via Twitter/Discord.</span
-                >
-                <span class="has-text-danger" v-else>{{ price.reason }}</span>
+                  <div class="has-text-right">
+                    <button
+                      class="button is-cns"
+                      @click="
+                        showFill = false;
+                        showModal = true;
+                      "
+                    >
+                      <span v-if="renew">Renew</span>
+                      <span v-else>Register</span>
+                    </button>
+                  </div>
+                </template>
               </div>
             </div>
           </div>
@@ -317,6 +289,10 @@ export default class Search extends Vue {
     return window.location.host == process.env.VUE_APP_MAINNET_HOST ? "" : "testnet";
   }
 
+  get renew(): boolean {
+    return this.resolveAns?.status == "Found";
+  }
+
   async search(): Promise<void> {
     this.isResolving = true;
     this.name = this.name.replace(/\s/g, "");
@@ -334,12 +310,12 @@ export default class Search extends Vue {
   }
 
   async getPrice(): Promise<void> {
-    this.price = await getPrice(`${this.name}.xch`, this.regYear);
+    this.price = await getPrice(`${this.name}.xch`, this.regYear, this.renew);
   }
 
   async register(): Promise<void> {
     this.registering = true;
-    const res = await register(`${this.name}.xch`, this.address);
+    const res = await register(`${this.name}.xch`, this.regYear, this.renew, this.address);
     if (res?.success) {
       this.offer = res.offer ?? "";
       this.address = "";
@@ -409,10 +385,6 @@ export default class Search extends Vue {
     if (now < 1710374400000) return "Extended";
     if (expsec < now + 90 * 24 * 60 * 60 * 1000) return "Grace Period";
     return "Releasing";
-  }
-
-  renew() {
-    //
   }
 }
 </script>

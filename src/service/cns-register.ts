@@ -34,7 +34,7 @@ export interface RegisterResponse {
   code?: string;
 }
 
-export async function getPrice(name: string, year: number): Promise<Price> {
+export async function getPrice(name: string, year: number, renew: boolean): Promise<Price> {
   try {
     const resp = await fetch(
       baseUrl +
@@ -42,6 +42,7 @@ export async function getPrice(name: string, year: number): Promise<Price> {
         new URLSearchParams({
           name: name,
           year: year.toString(),
+          renew: renew.toString(),
         }),
       {
         method: "GET",
@@ -77,6 +78,8 @@ export async function getPrice(name: string, year: number): Promise<Price> {
 
 export async function register(
   name: string,
+  year: number,
+  renew: boolean,
   address = "",
   publicKey = "",
   did = "",
@@ -96,6 +99,8 @@ export async function register(
         publicKey: publicKey,
         did: did,
         text: text,
+        renew: renew,
+        year: year,
       }),
     });
     const qresp = (await resp.json()) as RegisterResponse;
