@@ -244,7 +244,7 @@
         </section>
       </div>
     </div>
-    <Ranking v-if="!showDetail" class="mt-12rem" />
+    <Ranking v-if="!showDetail && showRanking" class="mt-12rem" />
     <footer class="mt-6 pb-4 px-4 has-text-centered">
       <a href="https://discord.com/invite/uP68PFVWSN" class="has-text-white" target="_blank">Discord</a>
       <a href=" https://twitter.com/ChiaNameService" target="_blank" class="has-text-white"> | Twitter</a>
@@ -284,6 +284,7 @@ export default class Search extends Vue {
   public registering = false;
   public regYear = 1;
   public showFill = false;
+  public showRanking = false;
 
   get NetworkHint(): string {
     return window.location.host == process.env.VUE_APP_MAINNET_HOST ? "" : "testnet";
