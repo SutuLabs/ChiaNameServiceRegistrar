@@ -68,8 +68,8 @@
                 </p>
 
                 <p v-if="price.code == 'TooShort'">
-                  During the current operation period of CNS, only names with {{ minLength }} or more characters can be registered for the time
-                  being. In the future, the registration of all names will be gradually opened. Stay tuned!
+                  During the current operation period of CNS, only names with {{ minLength }} or more characters can be registered
+                  for the time being. In the future, the registration of all names will be gradually opened. Stay tuned!
                 </p>
 
                 <template v-else-if="resolveAns?.status == 'Found'">
@@ -199,7 +199,8 @@
               @keyup.enter="register()"
               @click="register()"
             >
-              Register
+              <span v-if="renew">Renew</span>
+              <span v-else>Register</span>
             </button>
           </div>
         </footer>
