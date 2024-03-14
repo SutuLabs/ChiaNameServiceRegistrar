@@ -13,9 +13,7 @@
         <img src="@/assets/img/cns-logo.png" class="image is-96x96" style="margin: auto" />
         <p class="has-text-centered is-size-3 my-5 has-text-white has-text-weight-bold">
           Chia Name Service
-          <span class="mb-3 is-size-7 has-text-weight-normal">
-            {{ NetworkHint }}
-          </span>
+          <span v-if="isTestnet" class="mb-3 is-size-7 has-text-weight-normal">testnet</span>
         </p>
       </div>
       <div class="is-flex is-justify-content-center max-w-90">
@@ -134,11 +132,11 @@
                   </p>
                   <p>
                     <span class="is-size-6 has-text-grey">Registration Fee</span
-                    ><span class="is-pulled-right">{{ price.registrationFee / 1000000000000 }} XCH</span>
+                    ><span class="is-pulled-right">{{ price.registrationFee / 1000000000000 }} {{ unit }}</span>
                   </p>
                   <p>
                     <span class="is-size-6 has-text-grey">Annual Fee</span
-                    ><span class="is-pulled-right">{{ price.annualFee / 1000000000000 }} XCH</span>
+                    ><span class="is-pulled-right">{{ price.annualFee / 1000000000000 }} {{ unit }}</span>
                   </p>
                   <p>
                     <span class="is-size-6 has-text-grey">Royalty Percentage</span
@@ -147,7 +145,7 @@
                   <p>
                     <span class="is-size-6 has-text-grey">Total</span
                     ><span class="is-pulled-right"
-                      >{{ (price.price * (10000 + price.royaltyPercentage)) / 10000000000000000 }} XCH</span
+                      >{{ (price.price * (10000 + price.royaltyPercentage)) / 10000000000000000 }} {{ unit }}</span
                     >
                   </p>
 
@@ -286,8 +284,12 @@ export default class Search extends Vue {
   public showFill = false;
   public showRanking = false;
 
-  get NetworkHint(): string {
-    return window.location.host == process.env.VUE_APP_MAINNET_HOST ? "" : "testnet";
+  get isTestnet(): boolean {
+    return window.location.host != process.env.VUE_APP_MAINNET_HOST;
+  }
+
+  get unit(): string {
+    return this.isTestnet ? "TXCH" : "XCH";
   }
 
   get renew(): boolean {
