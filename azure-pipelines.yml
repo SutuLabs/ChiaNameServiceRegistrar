@@ -4,7 +4,7 @@ trigger:
   batch: true
   branches:
     include:
-      - master
+      - main
 
 pool:
   vmImage: "ubuntu-latest"
@@ -45,7 +45,7 @@ stages:
 
   - stage: qa
     displayName: qa
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
     dependsOn:
       - build
     jobs:
