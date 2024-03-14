@@ -42,19 +42,16 @@
           <div class="card mt-4">
             <header class="card-header">
               <p v-if="resolveAns?.status == 'Found'" class="card-header-title break-all">
-                <a
-                  class="has-text-link is-size-5 break-all"
-                  :href="`https://${name.toLocaleLowerCase()}.xch.cool`"
-                  target="_blank"
-                  >{{ name }}.xch<i class="mdi mdi-open-in-new"></i
+                <a class="has-text-link is-size-5 break-all" :href="cnsUrl" target="_blank"
+                  >{{ cnsName }}<i class="mdi mdi-open-in-new"></i
                 ></a>
               </p>
-              <p v-else class="card-header-title break-all">{{ name.toLocaleLowerCase() }}.xch</p>
+              <p v-else class="card-header-title break-all">{{ cnsName }}</p>
             </header>
             <div class="card-content">
               <div class="content">
                 <p>
-                  <span class="is-size-5 has-text-weight-bold">{{ name.toLocaleLowerCase() }}.xch </span>
+                  <span class="is-size-5 has-text-weight-bold">{{ cnsName }}</span>
                   <span v-if="price.code == 'TooShort'" class="has-text-warning"
                     ><i class="mdi mdi-dots-horizontal-circle mdi-18px"></i>Not Open Yet</span
                   >
@@ -77,9 +74,7 @@
 
                 <template v-else-if="resolveAns?.status == 'Found'">
                   This name has been registered. Go to view
-                  <a class="has-text-link" :href="`https://${name.toLocaleLowerCase()}.xch.cool`" target="_blank"
-                    >Profile Homepage<i class="mdi mdi-open-in-new"></i></a
-                  >.
+                  <a class="has-text-link" :href="cnsUrl" target="_blank">Profile Homepage<i class="mdi mdi-open-in-new"></i></a>.
                   <br />
                   <ul class="mb-6">
                     <li v-if="resolveAns.expiry">Expiry Date: {{ new Date(resolveAns.expiry * 1000).toLocaleDateString() }}</li>
@@ -172,14 +167,14 @@
       <div class="modal-background"></div>
       <div class="modal-card" v-if="!offer">
         <header class="modal-card-head">
-          <p class="modal-card-title">Register {{ name.toLocaleLowerCase() }}.xch</p>
+          <p class="modal-card-title">Register {{ cnsName }}</p>
           <button class="delete" aria-label="close" @click="showModal = false"></button>
         </header>
         <section class="modal-card-body">
           <div class="field">
             <label class="label">Name</label>
             <div class="control">
-              <input class="input" type="text" disabled :value="name.toLocaleLowerCase() + '.xch'" />
+              <input class="input" type="text" disabled :value="cnsName" />
             </div>
           </div>
           <div class="field">
@@ -225,12 +220,12 @@
         <section class="modal-card-body">
           <div class="columns is-align-items-start m-3">
             <div class="column is-5 box has-text-centered mr-6 ml-3">
-              <a class="mr-4 has-text-dark" :href="offerUri" :download="name.toLocaleLowerCase() + '.xch.offer'" @click.stop=""
+              <a class="mr-4 has-text-dark" :href="offerUri" :download="cnsName + '.offer'" @click.stop=""
                 ><i class="mdi mdi-arrow-collapse-down mdi-48px"></i
               ></a>
               <p class="is-size-5">Take Offer</p>
               <p>
-                <a class="mr-4" :href="offerUri" :download="name.toLocaleLowerCase() + '.xch.offer'" @click.stop="">Download</a
+                <a class="mr-4" :href="offerUri" :download="cnsName + '.offer'" @click.stop="">Download</a
                 ><a @click.stop="copy(offer)">Copy</a>
               </p>
             </div>
@@ -292,6 +287,14 @@ export default class Search extends Vue {
 
   get renew(): boolean {
     return this.resolveAns?.status == "Found";
+  }
+
+  get cnsName(): string {
+    return `${this.name.toLocaleLowerCase()}.xch`;
+  }
+
+  get cnsUrl(): string {
+    return `https://${this.cnsName}.cool`;
   }
 
   async search(): Promise<void> {
