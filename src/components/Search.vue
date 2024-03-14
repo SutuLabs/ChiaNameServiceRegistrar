@@ -68,7 +68,7 @@
                 </p>
 
                 <p v-if="price.code == 'TooShort'">
-                  During the current operation period of CNS, only names with 4 or more characters can be registered for the time
+                  During the current operation period of CNS, only names with {{ minLength }} or more characters can be registered for the time
                   being. In the future, the registration of all names will be gradually opened. Stay tuned!
                 </p>
 
@@ -276,6 +276,7 @@ export default class Search extends Vue {
   public regYear = 1;
   public showFill = false;
   public showRanking = false;
+  public minLength = 6;
 
   get isTestnet(): boolean {
     return window.location.host != process.env.VUE_APP_MAINNET_HOST;
