@@ -256,7 +256,6 @@
 import { getPrice, Price, register } from "@/service/cns-register";
 import { ResolveFailureAnswer, resolveName, StandardResolveAnswer } from "@/service/resolveName";
 import { copy } from "@/service/utility";
-import { bech32m } from "@scure/base";
 import { Options, Vue } from "vue-class-component";
 import Ranking from "./Ranking.vue";
 import { Pawket } from "pawket-js-sdk";
@@ -272,7 +271,6 @@ export default class Search extends Vue {
   public resolveAns: StandardResolveAnswer | ResolveFailureAnswer | null = null;
   public isResolving = false;
   public showDetail = false;
-  public ownerAddress = "";
   public errorMsg = "";
   public showModal = false;
   public period = 1;
@@ -302,10 +300,6 @@ export default class Search extends Vue {
     this.name = this.name.split(".")[0];
     this.resolveAns = await resolveName(`${this.name}.xch`);
     if (this.resolveAns.status != "Failure") {
-      this.ownerAddress = bech32m.encode(
-        "xch",
-        bech32m.toWords(this.fromHexString((this.resolveAns as StandardResolveAnswer).data ?? ""))
-      );
       if (this.resolveAns.status == "NotFound") await this.getPrice();
     }
     this.showDetail = true;
