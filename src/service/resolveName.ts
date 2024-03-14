@@ -31,7 +31,7 @@ export async function resolveName(name: string): Promise<StandardResolveAnswer |
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        queries: [{ name, type: "address" }],
+        queries: [{ name, type: "whois" }],
       }),
     });
     const qresp = (await resp.json()) as StandardResolveQueryResponse;
