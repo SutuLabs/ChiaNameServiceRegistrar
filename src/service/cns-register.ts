@@ -1,4 +1,3 @@
-const royaltyAddress = process.env.VUE_APP_ROYALTY_ADDRESS ?? "";
 const baseUrl =
   window.location.host == process.env.VUE_APP_MAINNET_HOST
     ? process.env.VUE_APP_API_CNS_URL
@@ -80,6 +79,7 @@ export async function register(
   name: string,
   year: number,
   renew: boolean,
+  royaltyAddress = "",
   address = "",
   publicKey = "",
   did = "",

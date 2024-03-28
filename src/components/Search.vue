@@ -47,6 +47,9 @@
                 ></a>
               </p>
               <p v-else class="card-header-title break-all">{{ cnsName }}</p>
+              <span v-if="referCode" class="has-text-info is-pulled-right mt-2 mx-3" :title="royaltyAddress"
+                ><i class="mdi mdi-storefront mdi-18px mx-1"></i>{{ referCode }}</span
+              >
             </header>
             <div class="card-content">
               <div class="content">
@@ -255,6 +258,7 @@ import { copy } from "@/service/utility";
 import { Options, Vue } from "vue-class-component";
 import Ranking from "./Ranking.vue";
 import { Pawket } from "pawket-js-sdk";
+import { getRoyaltyAddress } from "@/service/royalty";
 
 @Options({
   components: {
@@ -299,6 +303,17 @@ export default class Search extends Vue {
     return `https://${this.cnsName}.cool`;
   }
 
+  get referCode(): string {
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+    const code = params.get("code");
+    return code ?? "";
+  }
+
+  get royaltyAddress(): string {
+    return getRoyaltyAddress(this.referCode);
+  }
+
   async search(): Promise<void> {
     this.isResolving = true;
     this.name = this.name.replace(/\s/g, "");
@@ -317,7 +332,8 @@ export default class Search extends Vue {
 
   async register(): Promise<void> {
     this.registering = true;
-    const res = await register(`${this.name}.xch`, this.regYear, this.renew, this.address);
+
+    const res = await register(`${this.name}.xch`, this.regYear, this.renew, this.royaltyAddress, this.address);
     if (res?.success) {
       this.offer = res.offer ?? "";
       this.address = "";
