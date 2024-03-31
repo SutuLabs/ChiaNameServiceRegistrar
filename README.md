@@ -1,6 +1,6 @@
 # Chia Name Service Registrar
 
-Change the royalty address to yours [HERE](src/service/cns-register.ts#L1).
+Change the royalty address to yours [HERE](src/service/royalty.ts).
 Then you can start earning your agency commission.
 
 ## Project setup
