@@ -8,9 +8,18 @@ export function getRoyaltyAddress(code: string | null): string {
       return "txch1tanqtjx2lymsjuyy4af23p598ksnnwc8gd98zmynfraa088kewlqq62rt2";
     }
   } else {
-    if (code == "hezuoshe") {
-      return "";
+    if (code == "hiya") {
+      return "xch19tq8q0tkm2660mfpjqv9y94j7fcdfpx860a9ymskeulafk9d653qu8wkyk";
+    } else if (code == "hezuoshe") {
+      return "xch1k3vuxal2s9sl2w3v5dgrckq02tg0uvnswsfmj40j52apkxfagg9q3yrgym";
+    } else if (code == "seasonshome") {
+      return "xch1p4xeecj35avsjf94y0cysq59swuzgw5544pxym3kmn6qjg67tttqlw0g6a";
+    } else if (code == "tanggang") {
+      return "xch1f2cwxnrg4lu33xxqqmx74qgzy9e84clxew4cqzczmlu2r96a6g8qjvl6j8";
+    } else if (code == "spacescan") {
+      return "xch1a6cd558gqsz2hch5pt0l8mx7zhavf32q5lyde09zjtqcmkelr9ns59k0j8";
     }
   }
+
   return process.env.VUE_APP_ROYALTY_ADDRESS ?? "";
 }
