@@ -135,7 +135,10 @@
                   </p>
                   <p>
                     <span class="is-size-6 has-text-grey">Annual Fee</span
-                    ><span class="is-pulled-right">{{ price.annualFee / 1000000000000 }} {{ unit }}</span>
+                    ><span class="is-pulled-right"
+                      >{{ price.annualFee / 1000000000000 }} × {{ price.regYear }} =
+                      {{ (price.annualFee * price.regYear) / 1000000000000 }} {{ unit }}</span
+                    >
                   </p>
                   <p>
                     <span class="is-size-6 has-text-grey">Royalty Percentage</span
@@ -275,7 +278,7 @@ export default class Search extends Vue {
   public errorMsg = "";
   public showModal = false;
   public period = 1;
-  public price: Price = { name: "", price: -1, annualFee: -1, royaltyPercentage: -1, registrationFee: -1 };
+  public price: Price = { name: "", price: -1, annualFee: -1, regYear: -1, royaltyPercentage: -1, registrationFee: -1 };
   public registerErrMsg = "";
   public offer = "";
   public registering = false;
@@ -364,7 +367,7 @@ export default class Search extends Vue {
 
   reset(): void {
     this.resolveAns = null;
-    this.price = { name: "", price: -1, annualFee: -1, royaltyPercentage: -1, registrationFee: -1 };
+    this.price = { name: "", price: -1, annualFee: -1, regYear: -1, royaltyPercentage: -1, registrationFee: -1 };
     this.errorMsg = "";
   }
 
