@@ -227,21 +227,37 @@
         </header>
         <section class="modal-card-body">
           <div class="columns is-align-items-start m-3">
-            <div class="column is-5 box has-text-centered mr-6 ml-3">
-              <a class="mr-4 has-text-dark" :href="offerUri" :download="cnsName + '.offer'" @click.stop=""
-                ><i class="mdi mdi-arrow-collapse-down mdi-48px"></i
-              ></a>
-              <p class="is-size-5">Take Offer</p>
+            <div class="column is-7 box has-text-centered mr-6 ml-7">
+              <a class="mr-4 has-text-dark" :href="offerUri" :download="cnsName + '.offer'" @click.stop="">
+                <!-- <i class="mdi mdi-arrow-collapse-down mdi-48px"></i > -->
+                <img src="@/assets/img/icon.jpg" class="image is-64x64 is-inline-block ml-4" />
+              </a>
+              <p class="is-size-6 mb-3">CNS Offer File</p>
               <p>
-                <a class="mr-4" :href="offerUri" :download="cnsName + '.offer'" @click.stop="">Download</a
-                ><a @click.stop="copy(offer)">Copy</a>
+                <a class="mr-4 underlined_link bold_link" :href="offerUri" :download="cnsName + '.offer'" @click.stop=""
+                  >Download</a
+                ><a class="underlined_link bold_link" @click.stop="copy(offer)">Copy</a>
               </p>
             </div>
-            <div class="column is-5 box has-text-centered is-clickable" @click="openPawket()">
-              <img class="p-2" src="@/assets/img/logo-48x48.png" />
-              <p class="pb-5 is-size-5">Register by Pawket</p>
-            </div>
           </div>
+          <p class="mt-5 is-size-5">
+            Take the offer by
+            <a href="javascript:void(0)" @click="openPawket()" class="is-pawket-link">
+              <img src="@/assets/img/logo-48x48.png" class="image is-16x16 is-inline-block" />
+              Pawket</a
+            >
+            or
+            <a target="_blank" href="https://play.goby.app/takeOffer" class="is-goby-link">
+              <img src="@/assets/img/goby.png" class="image is-16x16 is-inline-block" />
+              Goby</a
+            >
+            wallet.
+          </p>
+
+          <p class="mt-5 has-text-grey">
+            (Note: If you use Goby wallet, you need to take the offer through
+            <a target="_blank" href="https://play.goby.app/takeOffer" class="underlined_link">https://play.goby.app/takeOffer</a>)
+          </p>
         </section>
       </div>
     </div>
@@ -446,5 +462,23 @@ export default class Search extends Vue {
   background-color: #40ac5c;
   border-color: transparent;
   color: #fff;
+}
+
+.is-goby-link {
+  color: #3aac59;
+  font-weight: bolder;
+}
+
+.is-pawket-link {
+  color: #39c0ae;
+  font-weight: bolder;
+}
+
+.underlined_link {
+  text-decoration: underline;
+}
+
+.bold_link {
+  font-weight: 500;
 }
 </style>
