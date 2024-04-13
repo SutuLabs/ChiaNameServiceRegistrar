@@ -36,8 +36,8 @@
           <a class="button is-cns is-medium" v-else @click="search()">Search</a>
         </p>
       </div>
-      <div v-if="showDetail && !isResolving" class="is-flex is-justify-content-center mt-4 mx-4">
-        <div class="column is-5" v-if="resolveAns">
+      <div v-if="showDetail && !isResolving" class="is-flex is-justify-content-center mt-4 mx-4 columns is-mobile">
+        <div class="column is-half-tablet is-5-desktop is-full-mobile" v-if="resolveAns">
           <span class="is-size-5 has-text-white mb-4">Result</span>
           <div class="card mt-4">
             <header class="card-header">
@@ -47,10 +47,18 @@
                 ></a>
               </p>
               <p v-else class="card-header-title break-all">{{ cnsName }}</p>
-              <span v-if="referCode && royaltyAddress" class="has-text-info is-pulled-right mt-2 mx-3" :title="royaltyAddress"
+              <span
+                v-if="referCode && royaltyAddress"
+                class="has-text-info is-pulled-right mt-2 mx-3"
+                :title="royaltyAddress"
+                @click="showRoyalty = !showRoyalty"
                 ><i class="mdi mdi-storefront mdi-18px mx-1"></i>{{ referCode }}</span
               >
             </header>
+            <div v-if="referCode && royaltyAddress && showRoyalty" class="royalty-address notification">
+              {{ royaltyAddress }}
+              <button class="delete" @click="showRoyalty = false"></button>
+            </div>
             <div class="card-content">
               <div class="content">
                 <p>
@@ -301,6 +309,7 @@ export default class Search extends Vue {
   public regYear = 1;
   public showFill = false;
   public showRanking = false;
+  public showRoyalty = false;
   public minLength = 6;
 
   get isTestnet(): boolean {
@@ -480,5 +489,11 @@ export default class Search extends Vue {
 
 .bold_link {
   font-weight: 500;
+}
+
+.royalty-address {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>
