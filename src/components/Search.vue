@@ -47,7 +47,7 @@
                 ></a>
               </p>
               <p v-else class="card-header-title break-all">{{ cnsName }}</p>
-              <span v-if="referCode" class="has-text-info is-pulled-right mt-2 mx-3" :title="royaltyAddress"
+              <span v-if="referCode && royaltyAddress" class="has-text-info is-pulled-right mt-2 mx-3" :title="royaltyAddress"
                 ><i class="mdi mdi-storefront mdi-18px mx-1"></i>{{ referCode }}</span
               >
             </header>
