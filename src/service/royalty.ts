@@ -18,6 +18,8 @@ export function getRoyaltyAddress(code: string | null): string {
       return "xch1f2cwxnrg4lu33xxqqmx74qgzy9e84clxew4cqzczmlu2r96a6g8qjvl6j8";
     } else if (code == "spacescan") {
       return "xch1a6cd558gqsz2hch5pt0l8mx7zhavf32q5lyde09zjtqcmkelr9ns59k0j8";
+    } else if (code == "OzoneWallet") {
+      return "xch1hh9phcc8tt703dla70qthlhrxswy88va04zvc7vd8cx2v6a5ywyst8mgul";
     }
   }
 
