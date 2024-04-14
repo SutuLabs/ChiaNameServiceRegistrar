@@ -267,7 +267,7 @@
           </p>
 
           <p class="mt-5 has-text-grey">
-            (Note: If you use Goby wallet, you need to take the offer through
+            (Note: If the wallet doesn't respond, copy the offer into the Pawket wallet, or claim it at
             <a target="_blank" href="https://play.goby.app/takeOffer" class="underlined_link">https://play.goby.app/takeOffer</a>)
           </p>
         </section>
