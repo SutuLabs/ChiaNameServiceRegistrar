@@ -255,7 +255,11 @@
               Pawket</a
             >
             or
-            <a target="_blank" href="https://play.goby.app/takeOffer" class="is-goby-link">
+            <a v-if="isGobyExist" @click="openGoby()" class="is-goby-link">
+              <img src="@/assets/img/goby.png" class="image is-16x16 is-inline-block" />
+              Goby</a
+            >
+            <a v-else target="_blank" href="https://play.goby.app/takeOffer" class="is-goby-link">
               <img src="@/assets/img/goby.png" class="image is-16x16 is-inline-block" />
               Goby</a
             >
@@ -388,6 +392,18 @@ export default class Search extends Vue {
     } catch (error) {
       console.warn(error);
     }
+  }
+
+  get isGobyExist(): boolean {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const chia = (window as any).chia;
+    return !!chia;
+  }
+
+  openGoby(): void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const chia = (window as any).chia;
+    if (chia) chia.request({ method: "takeOffer", params: { offer: this.offer } });
   }
 
   reset(): void {
