@@ -48,15 +48,15 @@
               </p>
               <p v-else class="card-header-title break-all">{{ cnsName }}</p>
               <span
-                v-if="referCode && royaltyAddress"
+                v-if="referCode && royaltyEntity"
                 class="has-text-info is-pulled-right mt-2 mx-3"
-                :title="royaltyAddress"
+                :title="royaltyEntity.address"
                 @click="showRoyalty = !showRoyalty"
-                ><i class="mdi mdi-storefront mdi-18px mx-1"></i>{{ referCode }}</span
+                ><i class="mdi mdi-storefront mdi-18px mx-1"></i>{{ royaltyEntity.name ?? royaltyEntity.code }}</span
               >
             </header>
-            <div v-if="referCode && royaltyAddress && showRoyalty" class="royalty-address notification">
-              {{ royaltyAddress }}
+            <div v-if="referCode && royaltyEntity && showRoyalty" class="royalty-address notification">
+              {{ royaltyEntity.address }}
               <button class="delete" @click="showRoyalty = false"></button>
             </div>
             <div class="card-content">
@@ -290,7 +290,7 @@ import { copy } from "@/service/utility";
 import { Options, Vue } from "vue-class-component";
 import Ranking from "./Ranking.vue";
 import { Pawket } from "pawket-js-sdk";
-import { getRoyaltyAddress } from "@/service/royalty";
+import { getRoyaltyAddress, getRoyaltyEntity, RoyaltyEntity } from "@/service/royalty";
 
 @Options({
   components: {
@@ -345,6 +345,10 @@ export default class Search extends Vue {
 
   get royaltyAddress(): string {
     return getRoyaltyAddress(this.referCode);
+  }
+
+  get royaltyEntity(): RoyaltyEntity | undefined {
+    return getRoyaltyEntity(this.referCode);
   }
 
   async search(): Promise<void> {
